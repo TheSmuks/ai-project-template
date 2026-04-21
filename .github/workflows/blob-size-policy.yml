@@ -4,6 +4,13 @@ on:
   pull_request:
     types: [opened, synchronize]
 
+concurrency:
+  group: blob-size-policy-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
 jobs:
   check-blob-sizes:
     runs-on: ubuntu-latest

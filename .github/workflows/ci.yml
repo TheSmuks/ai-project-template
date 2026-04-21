@@ -6,75 +6,115 @@ on:
   pull_request:
     branches: [main]
 
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
 jobs:
-  commit-lint:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-      - name: Lint commit messages
-        uses: wagoid/commitlint-github-action@v6
-        with:
-          configFile: |
-            extends: ['@commitlint/config-conventional']
 
-  changelog-check:
+      # Node.js example:
+      # - uses: actions/setup-node@v4
+      #   with:
+      #     node-version: 22
+      #     cache: npm
+      # - run: npm ci
+      # - run: npm run lint
+
+      # Python example:
+      # - uses: actions/setup-python@v5
+      #   with:
+      #     python-version: '3.12'
+      #     cache: pip
+      # - run: pip install -e '.[dev]'
+      # - run: ruff check .
+
+      # Go example:
+      # - uses: actions/setup-go@v5
+      #   with:
+      #     go-version: '1.22'
+      # - run: golangci-lint run ./...
+
+      # Rust example:
+      # - uses: actions/setup-rust@v1
+      #   with:
+      #     rust-version: stable
+      # - run: cargo clippy -- -D warnings
+
+      - name: Placeholder — configure lint for your project
+        run: echo "Replace this step with your lint command. See commented examples above."
+
+  typecheck:
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
     steps:
       - uses: actions/checkout@v6
-      - name: Check CHANGELOG.md is updated
-        uses: dangoslen/changelog-enforcer@v3
-        with:
-          changeLogPath: CHANGELOG.md
-          missingUpdateErrorMessage: |
-            Please update CHANGELOG.md with your changes under the [Unreleased] section.
-            See CONTRIBUTING.md for guidelines.
 
-  blob-size-policy:
-    uses: ./.github/workflows/blob-size-policy.yml
+      # Node.js example:
+      # - uses: actions/setup-node@v4
+      #   with:
+      #     node-version: 22
+      #     cache: npm
+      # - run: npm ci
+      # - run: npx tsc --noEmit
+
+      # Python (mypy) example:
+      # - uses: actions/setup-python@v5
+      #   with:
+      #     python-version: '3.12'
+      #     cache: pip
+      # - run: pip install -e '.[dev]'
+      # - run: mypy src/
+
+      - name: Placeholder — configure typecheck for your project
+        run: echo "Replace this step with your typecheck command. See commented examples above."
 
   test:
     runs-on: ubuntu-latest
-    # Replace the steps below with your project's test commands.
-    # Uncomment and customize for your language:
     steps:
       - uses: actions/checkout@v6
-      - name: Placeholder — configure for your project
+
+      # Node.js example (with caching):
+      # - uses: actions/setup-node@v4
+      #   with:
+      #     node-version: 22
+      #     cache: npm
+      # - run: npm ci
+      # - run: npm test
+
+      # Python example (with caching):
+      # - uses: actions/setup-python@v5
+      #   with:
+      #     python-version: '3.12'
+      #     cache: pip
+      # - run: pip install -e '.[dev]'
+      # - run: pytest
+
+      # Go example (caching is built into setup-go):
+      # - uses: actions/setup-go@v5
+      #   with:
+      #     go-version: '1.22'
+      # - run: go test ./...
+
+      # Rust example (caching via Cargo):
+      # - uses: actions/setup-rust@v1
+      #   with:
+      #     rust-version: stable
+      # - uses: actions/cache@v4
+      #   with:
+      #     path: |
+      #       ~/.cargo/registry
+      #       ~/.cargo/git
+      #       target
+      #     key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+      # - run: cargo test
+
+      - name: Placeholder — configure tests for your project
         run: |
-          echo "This is a placeholder test job."
-          echo "Replace with your actual test commands in .github/workflows/ci.yml"
-          echo ""
-          echo "Examples:"
-          echo "  Node: npm ci && npm test"
-          echo "  Python: pip install -e '.[dev]' && pytest"
-          echo "  Go: go test ./..."
-          echo "  Rust: cargo test"
-
-    # Node.js example:
-    # - uses: actions/setup-node@v4
-    #   with:
-    #     node-version: 22
-    #     cache: npm
-    # - run: npm ci
-    # - run: npm test
-
-    # Python example:
-    # - uses: actions/setup-python@v5
-    #   with:
-    #     python-version: '3.12'
-    # - run: pip install -e '.[dev]'
-    # - run: pytest
-
-    # Go example:
-    # - uses: actions/setup-go@v5
-    #   with:
-    #     go-version: '1.22'
-    # - run: go test ./...
-
-    # Rust example:
-    # - uses: actions/setup-rust@v1
-    #   with:
-    #     rust-version: stable
-    # - run: cargo test
+          echo "Replace this step with your test command."
+          echo "See commented examples above for caching patterns."

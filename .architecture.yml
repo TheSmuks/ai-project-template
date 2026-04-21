@@ -1,0 +1,23 @@
+# Code quality thresholds for this project.
+# These are used by code review tools and CI checks.
+# Adjust values to match your project's conventions.
+
+# File size limits
+max_file_lines: 500          # Soft limit — exceeding triggers a review comment
+max_file_lines_hard: 1000     # Hard limit — exceeding is a CI warning
+
+# Function size limits
+max_function_lines: 50        # Soft limit for individual functions
+
+# Module complexity
+max_exports: 20               # Maximum public exports per module
+max_nesting_depth: 4          # Maximum nesting levels
+
+# File patterns to exclude from checks
+ignore_patterns:
+  - "**/*.generated.*"
+  - "**/*.min.*"
+  - "**/vendor/**"
+  - "**/node_modules/**"
+  - "**/__snapshots__/**"
+  - "docs/**"

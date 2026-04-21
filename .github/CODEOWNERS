@@ -1,0 +1,24 @@
+# CODEOWNERS
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owners for everything in the repo
+# Replace @org/project-team with your team or username
+* @org/project-team
+
+# Below are examples of granular ownership.
+# Uncomment and customize for your project.
+
+# CI/CD workflows
+# /.github/workflows/ @org/platform-team
+
+# Documentation
+# /docs/ @org/project-team
+
+# Architecture decisions
+# /docs/decisions/ @org/tech-leads
+
+# Source code (customize path for your project)
+# /src/ @org/project-team
+
+# Tests
+# /tests/ @org/project-team

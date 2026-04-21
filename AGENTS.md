@@ -1,5 +1,8 @@
 # Project Context
 
+> **If this is a new project from the ai-project-template, read [SETUP_GUIDE.md](./SETUP_GUIDE.md) first.**
+> That guide walks through every placeholder in this file and the rest of the template.
+
 This file is auto-discovered by AI coding agents (OMP, Codex, Cursor, Aider, Jules, VS Code, and others). It provides project-level context that guides agent behavior.
 
 ## Project Overview
@@ -38,6 +41,23 @@ This file is auto-discovered by AI coding agents (OMP, Codex, Cursor, Aider, Jul
 - Add tests for new behavior
 - Update CHANGELOG.md for user-facing changes
 
+### Module and File Size Guidelines
+
+<!-- Adjust these thresholds to match your project's conventions. -->
+<!-- These are guidelines, not hard limits — but exceeding them should prompt a review. -->
+
+| Metric | Guideline | Action if exceeded |
+|--------|-----------|-------------------|
+| File length | <!-- e.g. 500 --> lines | Split into focused modules |
+| Function/method length | <!-- e.g. 50 --> lines | Extract helpers |
+| Module exports | <!-- e.g. 20 --> public symbols | Re-evaluate module boundary |
+| Nesting depth | <!-- e.g. 4 --> levels | Flatten with early returns or extract |
+
+When a file or function exceeds these guidelines:
+1. Consider whether the code has multiple responsibilities
+2. If yes, extract the secondary concern into its own module
+3. If no, add a comment explaining why the length is justified
+
 ## Project Structure
 
 <!-- Document key directories once your project takes shape. Example:
@@ -61,6 +81,31 @@ docs/        # Project documentation
 - All new features must include tests
 - Bug fixes must include a regression test
 - Run the full test suite before submitting a PR
+- Tests should be deterministic: no reliance on external services, wall-clock time, or random state unless explicitly controlled
+- Prefer integration tests over mocks — mocks invent behaviors that never happen in production
+
+## Error Handling
+
+<!-- Define how errors should be propagated and logged. -->
+
+- **Do not suppress errors.** Catching an exception and continuing silently is a bug.
+- **Errors must be distinguishable from success.** A function that returns plausible-looking output when it has failed has broken its contract with every caller.
+- **Fail at the boundary.** Validate inputs at system edges (user input, network responses, file I/O). Trust internal code.
+- **Wrap, don't expose.** When wrapping an error from a dependency, add context. The caller should understand *what* failed, not just that something did.
+- **No lying.** If an operation partially fails, do not return a success result with some fields silently missing. Return an error or a structured result that preserves the truth.
+
+## Agent Behavior
+
+When an AI agent is working in this repository:
+
+1. **Always create PRs for changes.** Do not push directly to `main`.
+2. **Run available validation before requesting review.** Execute lint, type-check, and test commands before declaring work complete.
+3. **Read before editing.** Read the full file or section before making changes — context above and below the match determines the correct edit.
+4. **Check references before renaming.** Use `grep` or language-server tools to find every consumer of a symbol before changing it.
+5. **One concern per change.** A PR should address one issue or feature. Do not bundle unrelated refactors.
+6. **Update documentation in the same change.** If code behavior changes, update comments, doc strings, and relevant docs in the same commit.
+7. **Preserve invariants.** If the codebase has patterns (error handling, logging, auth), follow them. Do not introduce a new pattern without removing the old one.
+8. **Clean up after yourself.** Remove unused imports, dead code, and temporary files. A change should leave the codebase cleaner than it was found.
 
 ## Conventions
 

@@ -75,7 +75,7 @@ Dependency caching avoids re-downloading unchanged packages on every run. Config
 
 ```yaml
 steps:
-  - uses: actions/checkout@v4
+  - uses: actions/checkout@v6
 
   - uses: actions/setup-node@v4
     with:
@@ -91,7 +91,7 @@ steps:
 
 ```yaml
 steps:
-  - uses: actions/checkout@v4
+  - uses: actions/checkout@v6
 
   - uses: actions/setup-python@v5
     with:
@@ -107,7 +107,7 @@ steps:
 
 ```yaml
 steps:
-  - uses: actions/checkout@v4
+  - uses: actions/checkout@v6
 
   - uses: actions/setup-go@v5
     with:
@@ -123,7 +123,7 @@ steps:
 
 ```yaml
 steps:
-  - uses: actions/checkout@v4
+  - uses: actions/checkout@v6
 
   - uses: actions/cache@v4
     with:
@@ -152,20 +152,20 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - run: npm run lint
 
   typecheck:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - run: npm run typecheck
 
   test:
     needs: [lint, typecheck]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - run: npm test
 ```
 
@@ -181,7 +181,7 @@ jobs:
       matrix:
         node-version: [18, 20, 22]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - uses: actions/setup-node@v4
         with:
@@ -214,7 +214,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ inputs.node-version }}
@@ -267,7 +267,7 @@ jobs:
     outputs:
       coverage-pct: ${{ steps.coverage.outputs.pct }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - run: npm ci
       - id: coverage
         run: echo "pct=$(npm run test:coverage --silent)" >> "$GITHUB_OUTPUT"
@@ -289,7 +289,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -300,7 +300,7 @@ jobs:
   typecheck:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -312,7 +312,7 @@ jobs:
     needs: [lint, typecheck]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -324,7 +324,7 @@ jobs:
     needs: [test]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -414,7 +414,7 @@ Common conditions:
 ### Use shallow clones by default
 
 ```yaml
-- uses: actions/checkout@v4
+- uses: actions/checkout@v6
   # Default: fetch-depth 1 (shallow clone)
 ```
 
@@ -423,7 +423,7 @@ The default `fetch-depth` is `1`, which fetches only the latest commit. This is 
 Only use `fetch-depth: 0` (full history) when the job actually needs commit history, such as commit-lint:
 
 ```yaml
-- uses: actions/checkout@v4
+- uses: actions/checkout@v6
   with:
     fetch-depth: 0   # Required for commit-lint to inspect all commits
 ```

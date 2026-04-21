@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Split CI into separate workflow files (ci.yml, commit-lint.yml, changelog-check.yml, blob-size-policy.yml)
+- CI architecture guide (`docs/ci.md`)
+- Agent exploration section in ADOPTING.md
+- Template versioning via `.template-version`
+- `permissions` and `concurrency` declarations on all workflows
+
 ### Changed
 
 ### Deprecated

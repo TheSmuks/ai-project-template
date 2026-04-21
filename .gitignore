@@ -1,0 +1,83 @@
+# AI/LLM artifacts
+models/
+checkpoints/
+weights/
+*.gguf
+*.safetensors
+*.bin
+*.onnx
+*.pt
+*.pth
+*.h5
+*.pkl
+*.joblib
+
+# Training data and outputs
+data/raw/
+data/processed/
+outputs/
+runs/
+mlruns/
+wandb/
+lightning_logs/
+
+eval_results/
+benchmark_results/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+secrets/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+.venv/
+venv/
+env/
+
+# Node
+node_modules/
+.npm
+*.tsbuildinfo
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Build artifacts
+*.o
+*.a
+*.exe
+*.dll
+*.so
+*.dylib
+
+coverage/
+.coverage
+htmlcov/
+
+# Logs
+*.log
+logs/

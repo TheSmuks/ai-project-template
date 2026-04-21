@@ -1,8 +1,11 @@
 # Setup Guide for AI Agents
 
 This document guides an AI agent (or human) through customizing the `ai-project-template` into a real project. If you just cloned this template, start here.
+> **If you're adopting this into an existing repository, see [ADOPTING.md](./ADOPTING.md) instead.**
+
 
 ## What This Template Is
+> **Template version:** `0.2.0` — see [`.template-version`](./.template-version) for the current release.
 
 This is a **scaffolding structure**, not a project. Most files contain HTML-comment placeholders (`<!-- ... -->`) that must be filled in with project-specific values. The template provides:
 
@@ -83,12 +86,24 @@ Also add language-specific config:
 - Formatter config (`.prettierrc`, etc.)
 - Language server config if needed
 
-### 5. Update .github/workflows/ci.yml
+### 5. Configure CI workflows
 
-The CI workflow has a `test` job with placeholder commands. Update:
-- Add your install/build/test steps
-- Set the correct runtime version (Node, Python, Go, Rust)
-- Add any additional CI jobs your project needs
+The template provides four workflow files in `.github/workflows/`:
+
+| File | Purpose | Needs customization? |
+|------|---------|---------------------|
+| `ci.yml` | Lint, typecheck, test | **Yes** — replace placeholders with your commands |
+| `commit-lint.yml` | Enforces conventional commits | No — works out of the box |
+| `changelog-check.yml` | Requires CHANGELOG.md updates on PRs | No — works out of the box |
+| `blob-size-policy.yml` | Rejects files over 1MB | Maybe — adjust `BLOB_SIZE_LIMIT` if needed |
+
+For `ci.yml`:
+1. Uncomment the language block matching your project (Node, Python, Go, or Rust)
+2. Delete the other commented examples and the placeholder step
+3. Each commented block includes caching — keep it
+4. Add any additional jobs your project needs (coverage, deploy, etc.)
+
+For the full CI architecture guide, see [docs/ci.md](./docs/ci.md).
 
 ### 6. Update .architecture.yml
 
@@ -178,3 +193,11 @@ After setup:
 3. Push to the remote repository
 4. Verify all CI checks pass
 5. Start building
+
+
+## References & Further Reading
+
+- [architecture.md](https://architecture.md/) — Architecture-as-code specification
+- [agentskills.io/specification](https://agentskills.io/specification) — Agent skills specification
+- [agents.md](https://agents.md/) — AGENTS.md open format specification
+- [Oh My Pi documentation](https://github.com/can1357/oh-my-pi/tree/main/docs) — Oh My Pi harness documentation

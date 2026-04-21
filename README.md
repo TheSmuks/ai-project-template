@@ -2,6 +2,7 @@
 
 [![Changelog](https://img.shields.io/badge/changelog-Keep%20a%20Changelog-blue.svg)](./CHANGELOG.md)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
+[![Template](https://img.shields.io/badge/template-v0.2.0-blueviolet.svg)](./.template-version)
 
 <!-- One-line description of your project -->
 
@@ -22,6 +23,8 @@ git clone https://github.com/TheSmuks/ai-project-template.git
 # Or: click "Use this template" on GitHub
 cd ai-project-template
 ```
+
+This template can also be adopted into an existing project. See [ADOPTING.md](./ADOPTING.md) for the incremental adoption path.
 
 ### Configuration
 

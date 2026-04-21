@@ -1,7 +1,7 @@
 # Project Context
 
 > **If this is a new project from the ai-project-template, read [SETUP_GUIDE.md](./SETUP_GUIDE.md) first.**
-> That guide walks through every placeholder in this file and the rest of the template.
+> **If you're integrating this into an existing project, read [ADOPTING.md](./ADOPTING.md) instead.**
 
 This file is auto-discovered by AI coding agents (OMP, Codex, Cursor, Aider, Jules, VS Code, and others). It provides project-level context that guides agent behavior.
 
@@ -94,6 +94,22 @@ docs/        # Project documentation
 - **Wrap, don't expose.** When wrapping an error from a dependency, add context. The caller should understand *what* failed, not just that something did.
 - **No lying.** If an operation partially fails, do not return a success result with some fields silently missing. Return an error or a structured result that preserves the truth.
 
+## CI/CD
+
+CI uses separate workflow files, one concern per file. See [docs/ci.md](./docs/ci.md) for the full guide.
+
+| Workflow | Purpose |
+|----------|--------|
+| `ci.yml` | Lint, typecheck, test — project-specific jobs |
+| `commit-lint.yml` | Conventional commit enforcement |
+| `changelog-check.yml` | Changelog update enforcement (PRs only) |
+| `blob-size-policy.yml` | Rejects oversized files (PRs only) |
+
+When adding new CI checks:
+- Project-specific jobs (coverage, deploy) go in `ci.yml`
+- Cross-cutting policies (commit style, size limits) get their own workflow file
+- All workflows must have `permissions: contents: read` and a `concurrency` group
+
 ## Agent Behavior
 
 When an AI agent is working in this repository:
@@ -136,3 +152,15 @@ Examples: `feature/add-embeddings`, `fix/token-overflow`, `chore/update-deps`
 ### Changelog
 
 Follow [Keep a Changelog](https://keepachangelog.com/). Update `CHANGELOG.md` under `[Unreleased]` for every user-facing change.
+
+
+## Template Version
+
+This project was generated from `ai-project-template` version **0.2.0**. See [`.template-version`](./.template-version) for the current release. Agents can read this file to determine which conventions and files to expect.
+
+## References & Further Reading
+
+- [architecture.md](https://architecture.md/) — Architecture-as-code specification
+- [agentskills.io/specification](https://agentskills.io/specification) — Agent skills specification
+- [agents.md](https://agents.md/) — AGENTS.md open format specification
+- [Oh My Pi documentation](https://github.com/can1357/oh-my-pi/tree/main/docs) — Oh My Pi harness documentation

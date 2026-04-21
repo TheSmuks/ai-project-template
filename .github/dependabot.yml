@@ -1,0 +1,78 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    groups:
+      actions-minor-patch:
+        update-types:
+          - minor
+          - patch
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+      - github-actions
+
+  # Uncomment and configure for your language's package manager:
+
+  # - package-ecosystem: npm
+  #   directory: /
+  #   schedule:
+  #     interval: weekly
+  #     day: monday
+  #   groups:
+  #     npm-minor-patch:
+  #       update-types:
+  #         - minor
+  #         - patch
+  #   open-pull-requests-limit: 10
+  #   labels:
+  #     - dependencies
+  #     - npm
+
+  # - package-ecosystem: pip
+  #   directory: /
+  #   schedule:
+  #     interval: weekly
+  #     day: monday
+  #   groups:
+  #     pip-minor-patch:
+  #       update-types:
+  #         - minor
+  #         - patch
+  #   open-pull-requests-limit: 10
+  #   labels:
+  #     - dependencies
+  #     - python
+
+  # - package-ecosystem: gomod
+  #   directory: /
+  #   schedule:
+  #     interval: weekly
+  #     day: monday
+  #   groups:
+  #     go-minor-patch:
+  #       update-types:
+  #         - minor
+  #         - patch
+  #   open-pull-requests-limit: 10
+  #   labels:
+  #     - dependencies
+  #     - go
+
+  # - package-ecosystem: cargo
+  #   directory: /
+  #   schedule:
+  #     interval: weekly
+  #     day: monday
+  #   groups:
+  #     cargo-minor-patch:
+  #       update-types:
+  #         - minor
+  #         - patch
+  #   open-pull-requests-limit: 10
+  #   labels:
+  #     - dependencies
+  #     - rust

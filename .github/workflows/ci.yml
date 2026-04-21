@@ -31,3 +31,50 @@ jobs:
           missingUpdateErrorMessage: |
             Please update CHANGELOG.md with your changes under the [Unreleased] section.
             See CONTRIBUTING.md for guidelines.
+
+  blob-size-policy:
+    uses: ./.github/workflows/blob-size-policy.yml
+
+  test:
+    runs-on: ubuntu-latest
+    # Replace the steps below with your project's test commands.
+    # Uncomment and customize for your language:
+    steps:
+      - uses: actions/checkout@v4
+      - name: Placeholder — configure for your project
+        run: |
+          echo "This is a placeholder test job."
+          echo "Replace with your actual test commands in .github/workflows/ci.yml"
+          echo ""
+          echo "Examples:"
+          echo "  Node: npm ci && npm test"
+          echo "  Python: pip install -e '.[dev]' && pytest"
+          echo "  Go: go test ./..."
+          echo "  Rust: cargo test"
+
+    # Node.js example:
+    # - uses: actions/setup-node@v4
+    #   with:
+    #     node-version: 22
+    #     cache: npm
+    # - run: npm ci
+    # - run: npm test
+
+    # Python example:
+    # - uses: actions/setup-python@v5
+    #   with:
+    #     python-version: '3.12'
+    # - run: pip install -e '.[dev]'
+    # - run: pytest
+
+    # Go example:
+    # - uses: actions/setup-go@v5
+    #   with:
+    #     go-version: '1.22'
+    # - run: go test ./...
+
+    # Rust example:
+    # - uses: actions/setup-rust@v1
+    #   with:
+    #     rust-version: stable
+    # - run: cargo test

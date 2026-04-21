@@ -1,0 +1,51 @@
+name: Blob Size Policy
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  check-blob-sizes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check for large files in PR
+        run: |
+          # Get the list of files changed in this PR
+          FILES=$(git diff --name-only --diff-filter=ACM origin/${{ github.base_ref }}...HEAD)
+          
+          # Maximum allowed file size in bytes (default: 1MB)
+          # Override by setting BLOB_SIZE_LIMIT in your repository variables
+          MAX_SIZE=${BLOB_SIZE_LIMIT:-1048576}
+          
+          FAILED=0
+          
+          if [ -z "$FILES" ]; then
+            echo "No files to check."
+            exit 0
+          fi
+          
+          for FILE in $FILES; do
+            if [ ! -f "$FILE" ]; then
+              continue
+            fi
+            
+            SIZE=$(stat -f%z "$FILE" 2>/dev/null || stat -c%s "$FILE" 2>/dev/null || echo 0)
+            
+            if [ "$SIZE" -gt "$MAX_SIZE" ]; then
+              echo "::error file=$FILE::File exceeds size limit ($SIZE > $MAX_SIZE bytes). Consider using Git LFS or external storage."
+              FAILED=1
+            else
+              echo "OK: $FILE ($SIZE bytes)"
+            fi
+          done
+          
+          if [ "$FAILED" -eq 1 ]; then
+            echo ""
+            echo "Some files exceed the $MAX_SIZE byte size limit."
+            echo "Options:"
+            echo "  1. Use Git LFS: https://git-lfs.github.com/"
+            echo "  2. Store large assets externally and download at build time"
+            echo "  3. Override limit by setting BLOB_SIZE_LIMIT repository variable"
+            exit 1
+          fi

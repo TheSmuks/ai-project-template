@@ -34,7 +34,10 @@ These files from the template provide value for any repository, regardless of la
 | `docs/decisions/` | Architecture Decision Records | **Yes** — start recording decisions |
 | `.architecture.yml` | Code quality thresholds | **Yes** — set thresholds to match current state |
 | `.omp/agents/` | Agent definitions | **Yes** — keep agents that match your workflow |
-| `.github/workflows/ci.yml` | CI pipeline | **Maybe** — only if you want the template's CI checks |
+| `.github/workflows/ci.yml` | Lint, typecheck, test | **Maybe** — only if you want the template's CI checks |
+| `.github/workflows/commit-lint.yml` | Enforce conventional commits | **Maybe** — independent of existing CI |
+| `.github/workflows/changelog-check.yml` | Require changelog entries on PRs | **Maybe** — independent of existing CI |
+| `.github/workflows/blob-size-policy.yml` | Reject large files in PRs | **Maybe** — independent of existing CI |
 | `.devcontainer/` | Dev container config | **Maybe** — skip if you already have one |
 | `CODEOWNERS` | Code ownership | **Maybe** — skip if you already have one |
 | `SETUP_GUIDE.md` | Greenfield setup instructions | **No** — not relevant to existing projects |
@@ -80,7 +83,7 @@ Instead of filling placeholders from scratch, **read the existing code and deriv
 Don't introduce files that duplicate or conflict with existing infrastructure:
 
 - **`.devcontainer/`** — If the project already has a dev container, keep the existing one.
-- **`.github/workflows/ci.yml`** — If CI is already configured, add individual checks (commit lint, changelog, blob-size) as separate jobs in the existing workflow instead of replacing it.
+- **`.github/workflows/`** — If CI is already configured, copy individual workflow files (`commit-lint.yml`, `changelog-check.yml`, `blob-size-policy.yml`) as separate files alongside your existing workflows instead of replacing them. They run independently.
 - **`CODEOWNERS`** — If ownership is already defined, don't overwrite it.
 - **`.gitignore`** — Merge new patterns into the existing file; don't replace it.
 - **`SETUP_GUIDE.md`** — Not relevant to existing projects.

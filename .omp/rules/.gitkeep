@@ -1,0 +1,26 @@
+# Agent Rules
+
+This directory contains OMP agent rules that are automatically loaded when conditions match.
+
+## Rule Format
+
+Each rule file uses YAML frontmatter followed by markdown:
+
+```markdown
+---
+description: Short description of what this rule does
+condition: When this rule should be applied
+---
+
+Rule content in markdown...
+```
+
+## Fields
+
+- `description` (required): What the rule enforces
+- `condition` (required): When the rule is activated
+- `ttsrTrigger` (optional): Time-to-suggest-trigger for proactive rule suggestions
+
+## Adding Rules
+
+Create a new `.md` file in this directory. OMP loads all rule files and applies them when their conditions match the current context.

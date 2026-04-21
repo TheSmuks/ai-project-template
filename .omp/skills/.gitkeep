@@ -1,0 +1,41 @@
+# Agent Skills
+
+This directory contains OMP agent skills using the `SKILL.md` format.
+
+## Skill Format
+
+Each skill is a directory containing a `SKILL.md` with YAML frontmatter:
+
+```
+skills/
+  my-skill/
+    SKILL.md
+    helper-script.py
+```
+
+### SKILL.md Template
+
+```markdown
+---
+name: my-skill
+description: What this skill enables the agent to do
+---
+
+Detailed instructions for the agent in markdown.
+Include examples, constraints, and edge cases.
+```
+
+## Frontmatter Fields
+
+- `name` (required): Skill identifier
+- `description` (required): What the skill does
+- `license` (optional): License for the skill content
+- `compatibility` (optional): Compatible agent versions
+- `metadata` (optional): Additional metadata
+- `allowed-tools` (optional): Tools this skill is allowed to use
+
+## Adding Skills
+
+1. Create a subdirectory: `skills/my-skill/`
+2. Add `SKILL.md` with YAML frontmatter and instructions
+3. Add any supporting files the skill needs

@@ -10,7 +10,7 @@ jobs:
   commit-lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Lint commit messages
@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Check CHANGELOG.md is updated
         uses: dangoslen/changelog-enforcer@v3
         with:
@@ -40,7 +40,7 @@ jobs:
     # Replace the steps below with your project's test commands.
     # Uncomment and customize for your language:
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Placeholder — configure for your project
         run: |
           echo "This is a placeholder test job."

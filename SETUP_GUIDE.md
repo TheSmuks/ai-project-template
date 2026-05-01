@@ -42,7 +42,7 @@ Complete these steps in order. Mark each as done.
 
 ### 1. Fill in AGENTS.md
 
-Replace every `<!-- ... -->` placeholder:
+Replace every `<!-- ... -->` placeholder. For concrete examples and structural guidance, see [docs/agent-files-guide.md](./docs/agent-files-guide.md#b-agentsmd).
 
 - **Project Overview**: Name, description, primary language
 - **Build & Run**: Remove unused commands, fill in actual commands
@@ -63,7 +63,8 @@ Replace the template content with:
 
 ### 3. Fill in ARCHITECTURE.md
 
-Replace the placeholder with:
+Replace the placeholder with. For concrete examples and structural guidance, see [docs/agent-files-guide.md](./docs/agent-files-guide.md#c-architecturemd).
+
 - High-level architecture overview
 - Key components and their responsibilities
 - Data flow diagram or description
@@ -201,3 +202,4 @@ After setup:
 - [agentskills.io/specification](https://agentskills.io/specification) — Agent skills specification
 - [agents.md](https://agents.md/) — AGENTS.md open format specification
 - [Oh My Pi documentation](https://github.com/can1357/oh-my-pi/tree/main/docs) — Oh My Pi harness documentation
+- [docs/agent-files-guide.md](./docs/agent-files-guide.md) — Practical guide for writing AGENTS.md, ARCHITECTURE.md, and SKILL.md with concrete examples

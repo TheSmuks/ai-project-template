@@ -50,8 +50,9 @@ These files require modification. Don't copy them verbatim — tailor them to th
 
 ### AGENTS.md
 
-Instead of filling placeholders from scratch, **read the existing code and derive the values**:
+Instead of filling placeholders from scratch, **read the existing code and derive the values**. For concrete examples and structural guidance, see [docs/agent-files-guide.md](./docs/agent-files-guide.md#b-agentsmd).
 
+- **Incorporate Tiger Style principles** — Adapt the [Tiger Style](https://github.com/tigerbeetle/tigerbeetle/blob/main/docs/TIGER_STYLE.md) principles to your project's conventions: assertions, bounded operations, simple control flow, naming clarity, zero tech debt. Document the patterns your codebase already follows, adjusted for your language and framework — do not copy the Zig-specific mechanics verbatim.
 - **Project Overview**: Use the name and description from the existing `README.md`.
 - **Build & Run**: Copy the actual commands from `Makefile`, `package.json`, `Cargo.toml`, or CI config.
 - **Code Style**: Document the conventions the codebase *already follows*, not aspirational ones. If the code uses 2-space indentation and the template says 4, use 2. The goal is that AI agents match existing practice.
@@ -62,7 +63,7 @@ Instead of filling placeholders from scratch, **read the existing code and deriv
 
 ### ARCHITECTURE.md
 
-- Read the existing source tree and document what the system *actually does*.
+- Read the existing source tree and document what the system *actually does*. For concrete examples and structural guidance, see [docs/agent-files-guide.md](./docs/agent-files-guide.md#c-architecturemd).
 - Map the major components and their dependencies.
 - If an architecture doc already exists, merge it into the template format rather than replacing it.
 
@@ -198,3 +199,4 @@ Then walk the user through the Incremental Adoption Path described earlier in th
 - [agentskills.io/specification](https://agentskills.io/specification) — Agent skills specification
 - [agents.md](https://agents.md/) — AGENTS.md open format specification
 - [Oh My Pi documentation](https://github.com/can1357/oh-my-pi/tree/main/docs) — Oh My Pi harness documentation
+- [docs/agent-files-guide.md](./docs/agent-files-guide.md) — Practical guide for writing AGENTS.md, ARCHITECTURE.md, and SKILL.md with concrete examples

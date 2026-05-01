@@ -40,6 +40,7 @@ This file is auto-discovered by AI coding agents (OMP, Codex, Cursor, Aider, Jul
 - Keep functions small and focused
 - Add tests for new behavior
 - Update CHANGELOG.md for user-facing changes
+- Follow [Tiger Style](./docs/agent-files-guide.md#e-tiger-style-reference) principles: assertions, bounded operations, zero tech debt. See the guide for details.
 
 ### Module and File Size Guidelines
 
@@ -164,3 +165,5 @@ This project was generated from `ai-project-template` version **0.2.0**. See [`.
 - [agentskills.io/specification](https://agentskills.io/specification) — Agent skills specification
 - [agents.md](https://agents.md/) — AGENTS.md open format specification
 - [Oh My Pi documentation](https://github.com/can1357/oh-my-pi/tree/main/docs) — Oh My Pi harness documentation
+- [docs/agent-files-guide.md](./docs/agent-files-guide.md) — Practical guide for writing AGENTS.md, ARCHITECTURE.md, and SKILL.md
+- [Tiger Style (TigerBeetle)](https://github.com/tigerbeetle/tigerbeetle/blob/main/docs/TIGER_STYLE.md) — Engineering principles for high-reliability systems

@@ -26,7 +26,7 @@ These files serve as the contract between human developers and AI coding agents.
 
 ## B. AGENTS.md
 
-**Spec**: [agents.md](agents.md) — The open specification for agent project context files.
+**Spec**: [agents.md](https://agents.md/) — The open specification for agent project context files.
 
 `AGENTS.md` is the "README for AI agents." It tells agents how to build, test, and style code in this project. Fill every section with concrete values — agents will follow what you write.
 
@@ -160,7 +160,7 @@ monorepo/
 
 ## C. ARCHITECTURE.md
 
-**Spec**: [architecture.md](architecture.md) — Architecture-as-code specification.
+**Spec**: [architecture.md](https://architecture.md/) — Architecture-as-code specification.
 
 `ARCHITECTURE.md` is the system design document. It lets an agent understand the codebase structure, component responsibilities, and data flow — without reading every file.
 
@@ -456,7 +456,7 @@ Tiger Style principles apply regardless of language:
 
 ## F. OMP Extensions
 
-**New to OMP?** See [omp-extensions-guide.md](omp-extensions-guide.md) for a decision guide covering agents, commands, skills, rules, hooks, and tools.
+**New to OMP?** See [docs/omp-extensions-guide.md](./docs/omp-extensions-guide.md) for a decision guide covering agents, commands, skills, rules, hooks, and tools.
 
 This guide covers `AGENTS.md`, `ARCHITECTURE.md`, and `SKILL.md`. For the six OMP extension types in `.omp/`, see the extensions guide.
 
@@ -469,7 +469,7 @@ The extensions guide includes:
 Key distinction: **Agents, Commands, and Skills** are prompt-based capabilities. **Rules and Hooks** intercept and modify agent behavior. **Tools** extend the callable toolset.
 
 For the `.omp/` directory structure and format specs:
-- [omp-extensions-guide.md](omp-extensions-guide.md)
+- [docs/omp-extensions-guide.md](./docs/omp-extensions-guide.md)
 - [Oh My Pi documentation](https://github.com/can1357/oh-my-pi/tree/main/docs)
 
 ---
@@ -478,8 +478,8 @@ For the `.omp/` directory structure and format specs:
 
 ### Specification Links
 
-- [agents.md](agents.md) — AGENTS.md open format specification
-- [architecture.md](architecture.md) — Architecture-as-code specification
+- [agents.md](https://agents.md/) — AGENTS.md open format specification
+- [architecture.md](https://architecture.md/) — Architecture-as-code specification
 - [agentskills.io/specification](https://agentskills.io/specification) — Agent skills specification
 
 ### Tiger Style
@@ -493,8 +493,8 @@ For the `.omp/` directory structure and format specs:
 ### Related Template Documentation
 
 - [AGENTS.md](./AGENTS.md) — Project context template
-- [docs/architecture.md](architecture.md) — Architecture documentation template
+- [docs/architecture.md](https://architecture.md/) — Architecture documentation template
 - [SETUP_GUIDE.md](./SETUP_GUIDE.md) — New project setup guide
 - [ADOPTING.md](./ADOPTING.md) — Existing project adoption guide
-- [docs/ci.md](ci.md) — CI/CD configuration guide
-- [omp-extensions-guide.md](omp-extensions-guide.md) — OMP extension types guide
+- [docs/ci.md](./docs/ci.md) — CI/CD configuration guide
+- [docs/omp-extensions-guide.md](./docs/omp-extensions-guide.md) — OMP extension types guide

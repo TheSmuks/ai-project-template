@@ -161,7 +161,7 @@ Prompt: "Include which OMP extensions?" (multi-select)
 ✓ Tools     — Custom callable tools
 ```
 
-See [docs/omp-extensions-guide.md](../omp-extensions-guide.md) for details.
+See [docs/omp-extensions-guide.md](docs/omp-extensions-guide.md) for details.
 
 ### OMP Skills
 
@@ -375,10 +375,10 @@ If user interrupts or selects "skip" for many features:
 
 ## References
 
-- [SETUP_GUIDE.md](../../SETUP_GUIDE.md) — Static setup guide with detailed steps
-- [ADOPTING.md](../../ADOPTING.md) — Existing project adoption guide
-- [docs/omp-extensions-guide.md](../../docs/omp-extensions-guide.md) — OMP extension types reference
-- [docs/agent-files-guide.md](../../docs/agent-files-guide.md) — AGENTS.md, ARCHITECTURE.md, SKILL.md guides
+- [SETUP_GUIDE.md](SETUP_GUIDE.md) — Static setup guide with detailed steps
+- [ADOPTING.md](ADOPTING.md) — Existing project adoption guide
+- [docs/omp-extensions-guide.md](docs/omp-extensions-guide.md) — OMP extension types reference
+- [docs/agent-files-guide.md](docs/agent-files-guide.md) — AGENTS.md, ARCHITECTURE.md, SKILL.md guides
 
 ---
 

@@ -105,7 +105,7 @@ CI uses separate workflow files, one concern per file. See [docs/ci.md](./docs/c
 | `commit-lint.yml` | Conventional commit enforcement |
 | `changelog-check.yml` | Changelog update enforcement (PRs only) |
 | `blob-size-policy.yml` | Rejects oversized files (PRs only) |
-
+ `branch-cleanup.yml` | Deletes merged feature branches |
 When adding new CI checks:
 - Project-specific jobs (coverage, deploy) go in `ci.yml`
 - Cross-cutting policies (commit style, size limits) get their own workflow file

@@ -72,7 +72,7 @@ bash .omp/skills/cut-release/scripts/cut-release.sh 0.5.0 0.6.0
    | `AGENTS.md` | `version **X.Y.Z**` |
    | `SETUP_GUIDE.md` | `` `X.Y.Z` `` |
    | `.omp/skills/template-guide/SKILL.md` | `(X.Y.Z)` in examples |
-   | `.omp/skills/template-guide/scripts/audit.sh` | KNOWN list entry |
+ `.omp/skills/template-guide/scripts/audit.sh` | `TEMPLATE_VERSION=X.Y.Z` line |
    | `CHANGELOG.md` | Creates new version section from Unreleased |
 
 3. **Post-flight**: Verifies NEW_VERSION exists in all files and OLD_VERSION is gone.

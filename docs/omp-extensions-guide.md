@@ -224,21 +224,28 @@ version: 1.0.0
 **Format:** `.omp/hooks/pre/<name>.ts` or `.omp/hooks/post/<name>.ts`
 
 ```typescript
-import { OmpPreHook, ToolCallEvent } from '@oh-my-pi/sdk';
+import { OmpPreHook, ToolCallEvent, BashToolCall } from '@oh-my-pi/sdk';
+import { OmpPostHook, WriteEditToolCall } from '@oh-my-pi/sdk';
 
 // Pre-hook: runs before action completes
+// Return true to allow, false to block the operation
 export const myPreHook: OmpPreHook = async (event: ToolCallEvent): Promise<boolean> => {
-  if (event.tool === 'tool:bash' && /* some condition */) {
-    const response = await omp.ask({ question: 'Continue?', options: [...] });
-    return response === 'yes';
+  if (event.tool === 'tool:bash') {
+    const bashCall = event as BashToolCall;
+    // Example: Block dangerous commands
+    if (bashCall.arguments.command.includes('rm -rf /')) {
+      console.warn('[my-hook] BLOCKED: Dangerous command detected');
+      return false; // Block the operation
+    }
   }
   return true; // Allow by default
 };
 
 // Post-hook: runs after action completes
 export const myPostHook: OmpPostHook = async (event: ToolCallEvent): Promise<void> => {
-  if (event.tool === 'tool:write' && /* critical file */) {
-    console.log('[my-hook] Critical file modified:', event.arguments.path);
+  if (event.tool === 'tool:write' || event.tool === 'tool:edit') {
+    const writeCall = event as WriteEditToolCall;
+    console.log('[my-hook] File modified: ', writeCall.arguments.path);
   }
 };
 ```

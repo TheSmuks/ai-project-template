@@ -4,7 +4,7 @@ Opinionated starter template for AI-assisted development projects. Ships with ag
 
 [![Changelog](https://img.shields.io/badge/changelog-Keep%20a%20Changelog-blue.svg)](./CHANGELOG.md)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
-[![Template](https://img.shields.io/badge/template-v0.2.0-blueviolet.svg)](./.template-version)
+[![Template](https://img.shields.io/badge/template-v0.3.0-blueviolet.svg)](./.template-version)
 [![Use this template](https://img.shields.io/badge/use%20this%20template-Deploy-green?logo=github)](https://github.com/TheSmuks/ai-project-template/generate)
 
 ## Features

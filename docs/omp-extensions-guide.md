@@ -2,7 +2,7 @@
 
 A practical decision guide for the six Oh My Pi extension types: **agents**, **commands**, **skills**, **rules**, **hooks**, and **tools**. Each type solves a different problem; choosing the wrong one leads to friction.
 
-For AGENTS.md, ARCHITECTURE.md, and SKILL.md guidance, see [agent-files-guide.md](agent-files-guide.md).
+For AGENTS.md, ARCHITECTURE.md, and SKILL.md guidance, see [agent-files-guide.md](./docs/agent-files-guide.md).
 
 ---
 
@@ -405,5 +405,5 @@ Extensions can grow beyond their original type. Here's when to migrate:
 
 - [Oh My Pi documentation](https://github.com/can1357/oh-my-pi/tree/main/docs)
 - [agentskills.io/specification](https://agentskills.io/specification)
-- [agents.md](agent-files-guide.md#b-agentsmd)
-- [SKILL.md](agent-files-guide.md#d-skillmd)
+- [agents.md](./docs/agent-files-guide.md#b-agentsmd)
+- [SKILL.md](./docs/agent-files-guide.md#d-skillmd)

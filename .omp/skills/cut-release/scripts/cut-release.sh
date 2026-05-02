@@ -135,11 +135,11 @@ for file in "${MANIFEST[@]}"; do
         fail "$file does not contain \`OLD_VERSION\`"
       fi
       ;;
-    .omp/skills/template-guide/SKILL.md)
-      if grep -q "(${OLD_VERSION})" "$file"; then
-        pass "$file contains (OLD_VERSION) in examples"
+rq|    .omp/skills/template-guide/SKILL.md)
+      if grep -q "template-version: ${OLD_VERSION}" "$file"; then
+        pass "$file contains template-version: OLD_VERSION"
       else
-        fail "$file does not contain (OLD_VERSION) in examples"
+        fail "$file does not contain 'template-version: OLD_VERSION'"
       fi
       ;;
     .omp/skills/template-guide/scripts/audit.sh)
@@ -189,8 +189,8 @@ for file in "${MANIFEST[@]}"; do
       sed -i "s/\`${OLD_VERSION}\`/\`${NEW_VERSION}\`/g" "$file"
       ;;
 
-    .omp/skills/template-guide/SKILL.md)
-      sed -i "s/(${OLD_VERSION})/(${NEW_VERSION})/g" "$file"
+rp|    .omp/skills/template-guide/SKILL.md)
+      sed -i "s/template-version: ${OLD_VERSION}/template-version: ${NEW_VERSION}/" "$file"
       ;;
 
     .omp/skills/template-guide/scripts/audit.sh)
@@ -242,11 +242,11 @@ for file in "${MANIFEST[@]}"; do
         fail "$file does not contain \`NEW_VERSION\`"
       fi
       ;;
-    .omp/skills/template-guide/SKILL.md)
-      if grep -q "(${NEW_VERSION})" "$file"; then
-        pass "$file contains (NEW_VERSION) in examples"
+rp|    .omp/skills/template-guide/SKILL.md)
+      if grep -q "template-version: ${NEW_VERSION}" "$file"; then
+        pass "$file contains template-version: NEW_VERSION"
       else
-        fail "$file does not contain (NEW_VERSION) in examples"
+        fail "$file does not contain 'template-version: NEW_VERSION'"
       fi
       ;;
     .omp/skills/template-guide/scripts/audit.sh)

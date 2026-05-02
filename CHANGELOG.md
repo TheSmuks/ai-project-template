@@ -7,20 +7,54 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Rewrite `README.md` with template-specific content (replaces empty placeholders)
+- Add "Use this template" badge
+
+## [0.2.0] — 2026-05-01
+
 ### Added
 
-- Split CI into separate workflow files (ci.yml, commit-lint.yml, changelog-check.yml, blob-size-policy.yml)
-- CI architecture guide (`docs/ci.md`)
-- Agent exploration section in ADOPTING.md
+- Split CI into separate workflow files (`ci.yml`, `commit-lint.yml`, `changelog-check.yml`, `blob-size-policy.yml`)
+- `docs/ci.md` — CI architecture guide
+- Agent exploration section in `ADOPTING.md`
 - Template versioning via `.template-version`
 - `permissions` and `concurrency` declarations on all workflows
+- `docs/agent-files-guide.md` — Practical guide for writing AGENTS.md, ARCHITECTURE.md, and SKILL.md with concrete examples
+- Tiger Style reference in AGENTS.md and cross-references in SETUP_GUIDE.md, ADOPTING.md, docs/architecture.md
 
 ### Changed
 
-### Deprecated
-
-### Removed
+- Updated ADOPTING.md with Tiger Style incorporation requirement for AGENTS.md adaptation
+- Updated checkout action to `@v6` in all workflows
 
 ### Fixed
 
-### Security
+- Fetch full history in `blob-size-policy.yml` so `origin/main` resolves
+- Fix `stat` command order (Linux before macOS)
+- Remove duplicate description field in `feature_request.yml`
+- Remove `.omp/agents/.gitkeep` (replaced by example agents)
+
+## [0.1.0] — 2026-04-21
+
+### Added
+
+- `AGENTS.md` for cross-agent project context
+- `README.md` with template instructions
+- `CHANGELOG.md` (Keep a Changelog format)
+- `CONTRIBUTING.md` with conventions and commit guidelines
+- `LICENSE` (MIT)
+- `.editorconfig` and `.gitignore` for AI/LLM projects
+- `.omp/` directory structure (settings, example agents, hooks, tools)
+- GitHub issue templates (bug report, feature request), PR template, SECURITY.md
+- Placeholder CI workflow with conventional commit linting
+- `docs/architecture.md` and root `ARCHITECTURE.md` templates
+- Template extension: enhanced `AGENTS.md` (error handling, module size, agent behavior sections)
+- Three example agents in `.omp/agents/` (code-reviewer, adr-writer, changelog-updater)
+- `CODEOWNERS`, `dependabot.yml`, `.gitattributes`, enhanced PR template
+- `.devcontainer/devcontainer.json`
+- `docs/decisions/` with ADR template
+- `SETUP_GUIDE.md` — LLM bootstrap guide
+- `.architecture.yml` code quality thresholds
+- `blob-size-policy.yml` GitHub Actions workflow

@@ -14,107 +14,55 @@ permissions:
   contents: read
 
 jobs:
-  lint:
+  yaml-validate:
+    name: Validate YAML files
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
 
-      # Node.js example:
-      # - uses: actions/setup-node@v4
-      #   with:
-      #     node-version: 22
-      #     cache: npm
-      # - run: npm ci
-      # - run: npm run lint
-
-      # Python example:
-      # - uses: actions/setup-python@v5
-      #   with:
-      #     python-version: '3.12'
-      #     cache: pip
-      # - run: pip install -e '.[dev]'
-      # - run: ruff check .
-
-      # Go example:
-      # - uses: actions/setup-go@v5
-      #   with:
-      #     go-version: '1.22'
-      # - run: golangci-lint run ./...
-
-      # Rust example:
-      # - uses: actions/setup-rust@v1
-      #   with:
-      #     rust-version: stable
-      # - run: cargo clippy -- -D warnings
-
-      - name: Placeholder — configure lint for your project
-        run: echo "Replace this step with your lint command. See commented examples above."
-
-  typecheck:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-
-      # Node.js example:
-      # - uses: actions/setup-node@v4
-      #   with:
-      #     node-version: 22
-      #     cache: npm
-      # - run: npm ci
-      # - run: npx tsc --noEmit
-
-      # Python (mypy) example:
-      # - uses: actions/setup-python@v5
-      #   with:
-      #     python-version: '3.12'
-      #     cache: pip
-      # - run: pip install -e '.[dev]'
-      # - run: mypy src/
-
-      - name: Placeholder — configure typecheck for your project
-        run: echo "Replace this step with your typecheck command. See commented examples above."
-
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-
-      # Node.js example (with caching):
-      # - uses: actions/setup-node@v4
-      #   with:
-      #     node-version: 22
-      #     cache: npm
-      # - run: npm ci
-      # - run: npm test
-
-      # Python example (with caching):
-      # - uses: actions/setup-python@v5
-      #   with:
-      #     python-version: '3.12'
-      #     cache: pip
-      # - run: pip install -e '.[dev]'
-      # - run: pytest
-
-      # Go example (caching is built into setup-go):
-      # - uses: actions/setup-go@v5
-      #   with:
-      #     go-version: '1.22'
-      # - run: go test ./...
-
-      # Rust example (caching via Cargo):
-      # - uses: actions/setup-rust@v1
-      #   with:
-      #     rust-version: stable
-      # - uses: actions/cache@v4
-      #   with:
-      #     path: |
-      #       ~/.cargo/registry
-      #       ~/.cargo/git
-      #       target
-      #     key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-      # - run: cargo test
-
-      - name: Placeholder — configure tests for your project
+      - name: Validate YAML workflow files
         run: |
-          echo "Replace this step with your test command."
-          echo "See commented examples above for caching patterns."
+          for f in .github/workflows/*.yml; do
+            python3 -c "import yaml, sys; yaml.safe_load(open('$f'))" \
+              || { echo "FAIL: $f is not valid YAML"; exit 1; }
+            echo "PASS: $f"
+          done
+
+  markdown-links:
+    name: Validate internal markdown links
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Check markdown internal links resolve
+        run: |
+          ERRORS=0
+          find . -name '*.md' -type f | sort | while read -r md; do
+            grep -oE '\[([^]]+)\]\(\.?/([^)]+)\)' "$md" 2>/dev/null || continue
+            grep -oE '\[([^]]+)\]\(\.?/([^)]+)\)' "$md" | while IFS= read -r link; do
+              # Extract path: [text](path) → path
+              path="${link##*](}"
+              path="${path%)}"
+              path="${path#./}"
+              if [ ! -e "$path" ]; then
+                echo "FAIL: $md links to missing $path"
+                ERRORS=$((ERRORS + 1))
+              fi
+            done
+          done
+          if [ "$ERRORS" -gt 0 ]; then
+            echo "$ERRORS link(s) failed"
+            exit 1
+          fi
+          echo "All internal markdown links resolve."
+
+  audit:
+    name: Template compliance audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Run compliance audit
+        run: |
+          set -e
+          bash .omp/skills/template-guide/scripts/audit.sh

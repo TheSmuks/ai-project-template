@@ -115,6 +115,8 @@ When adding new CI checks:
 
 When an AI agent is working in this repository:
 
+Agents can invoke the `template-guide` skill (`.omp/skills/template-guide/SKILL.md`) to look up conventions, audit compliance, or get upgrade guidance.
+
 1. **Always create PRs for changes.** Do not push directly to `main`.
 2. **Run available validation before requesting review.** Execute lint, type-check, and test commands before declaring work complete.
 3. **Read before editing.** Read the full file or section before making changes — context above and below the match determines the correct edit.

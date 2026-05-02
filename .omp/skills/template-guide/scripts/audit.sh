@@ -3,6 +3,10 @@
 # Run from any directory in the repo:
 #   bash .omp/skills/template-guide/scripts/audit.sh
 
+# TEMPLATE_VERSION: This file is part of the ai-project-template version manifest.
+# cut-release.sh updates this line on each release.
+TEMPLATE_VERSION=0.5.0
+
 set -euo pipefail
 
 # scripts/ → template-guide → skills → .omp → repo-root = 4 levels up
@@ -12,7 +16,7 @@ cd ../../../..
 ERRORS=0
 
 pass() { echo "PASS: $*"; }
-fail() { echo "FAIL: $*"; ERRORS=$((ERRORS + 1)); }
+fail() { echo "FAIL: $*" >&2; ERRORS=$((ERRORS + 1)); }
 
 # ── 1. AGENTS.md: no HTML comment placeholders ──────────────────────────────
 echo "Checking AGENTS.md for placeholders..."
@@ -59,11 +63,11 @@ done
 echo "Checking .template-version..."
 if [ -f ".template-version" ]; then
     VERSION=$(cat .template-version | tr -d '[:space:]')
-    KNOWN="0.1.0 0.2.0 0.3.0 0.4.0 0.5.0"
-    if echo "$KNOWN" | grep -qw "$VERSION"; then
-        pass ".template-version matches known release ($VERSION)"
+    # Validate semver format: X.Y.Z (the real invariant)
+    if echo "$VERSION" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+$'; then
+        pass ".template-version is valid semver ($VERSION)"
     else
-        fail ".template-version has unknown version: $VERSION"
+        fail ".template-version is not valid semver: $VERSION"
     fi
 else
     fail ".template-version is missing"
@@ -94,6 +98,29 @@ done < <(find . -name '*.md' -type f | sort)
 if [ "$LINK_ERRORS" -eq 0 ]; then
     pass "all internal markdown links resolve"
 fi
+
+# ── 6. Version manifest consistency ────────────────────────────────────────
+echo "Checking version manifest consistency..."
+VERSION=$(cat .template-version 2>/dev/null | tr -d '[:space:]') || VERSION=""
+
+check_manifest() {
+    local file=$1 pattern=$2
+    if [ -f "$file" ]; then
+        if grep -q "$pattern" "$file" 2>/dev/null; then
+            pass "$file references version $VERSION"
+        else
+            fail "$file does not reference version $VERSION (expected pattern: $pattern)"
+        fi
+    else
+        fail "$file does not exist"
+    fi
+}
+
+# Check each manifest file contains the current version
+check_manifest "README.md" "template-v${VERSION}"
+check_manifest "AGENTS.md" "version \*\*${VERSION}\*\*"
+check_manifest "SETUP_GUIDE.md" "${VERSION}"
+check_manifest ".omp/skills/template-guide/SKILL.md" "${VERSION}"
 
 # ── Summary ─────────────────────────────────────────────────────────────────
 echo ""

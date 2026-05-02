@@ -1,0 +1,15 @@
+## What's Changed
+
+### Added
+- `merge-to-main` skill (`.omp/skills/merge-to-main/SKILL.md`) — automates PR lifecycle: create, monitor CI, fix failures, update checkboxes, merge
+- `branch-cleanup.yml` workflow — auto-deletes feature branches after PR is merged
+
+### Changed
+- Rewrite `README.md` with template-specific content (replaces empty placeholders)
+- Add "Use this template" badge
+- `README.md` and `AGENTS.md` updated to mention `merge-to-main` skill
+
+### Fixed
+- `branch-cleanup.yml` — requires `contents: write` permission to delete branches via Git refs API
+
+**Full Changelog**: https://github.com/TheSmuks/ai-project-template/compare/v0.2.0...v0.3.0

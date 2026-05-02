@@ -31,13 +31,22 @@ fail() { echo "FAIL: $*" >&2; ERRORS=$((ERRORS + 1)); }
 # ── Parse args ───────────────────────────────────────────────────────────────
 
 DRY_RUN=false
+REMAINING_ARGS=()
+
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    --dry-run) DRY_RUN=true; shift ;;
-    *) break ;;
+    --dry-run)
+      DRY_RUN=true
+      shift
+      ;;
+    *)
+      REMAINING_ARGS+=("$1")
+      shift
+      ;;
   esac
 done
 
+set -- "${REMAINING_ARGS[@]}"
 OLD_VERSION="${1:-}"
 NEW_VERSION="${2:-}"
 
@@ -71,6 +80,20 @@ MANIFEST=(
 )
 
 DATE_NOW=$(date +%Y-%m-%d)
+
+# ── Dry-run mode ─────────────────────────────────────────────────────────────
+
+if [[ "$DRY_RUN" == "true" ]]; then
+  echo "=== DRY RUN: Would update version manifest from $OLD_VERSION to $NEW_VERSION ==="
+  echo ""
+  echo "Files that would be updated:"
+  for file in "${MANIFEST[@]}"; do
+    echo "  - $file"
+  done
+  echo ""
+  echo "Dry-run complete. No files were modified."
+  exit 0
+fi
 
 # ── Pre-flight: Verify OLD_VERSION exists in all manifest files ────────────
 
@@ -146,16 +169,6 @@ echo ""
 
 echo "=== Updating version manifest: $OLD_VERSION → $NEW_VERSION ==="
 
-if [[ "$DRY_RUN" == "true" ]]; then
-  echo "[DRY RUN] Would update:"
-  for file in "${MANIFEST[@]}"; do
-    echo "  - $file"
-  done
-  echo ""
-  echo "=== DRY RUN COMPLETE (no changes made) ==="
-  exit 0
-fi
-
 for file in "${MANIFEST[@]}"; do
   echo "Updating $file..."
 
@@ -185,43 +198,7 @@ for file in "${MANIFEST[@]}"; do
       ;;
 
     CHANGELOG.md)
-      python3 - <<'PYTHON_SCRIPT'
-import re
-import sys
-
-new_version = sys.argv[1]
-date_now = sys.argv[2]
-old_version = sys.argv[3]
-
-with open('CHANGELOG.md', 'r') as f:
-  content = f.read()
-
-# Extract unreleased section
-unreleased_match = re.search(r'## \[Unreleased\](.*?)(?=\n## \[|\Z)', content, re.DOTALL)
-if not unreleased_match:
-  print("FAIL: No [Unreleased] section found")
-  exit(1)
-
-unreleased_content = unreleased_match.group(1).strip()
-
-# Build new version section
-new_section = f"## [{new_version}] — {date_now}\n\n{unreleased_content}\n\n## [Unreleased]"
-
-# Replace
-new_content = re.sub(
-  r'## \[Unreleased\].*?(?=\n## \[|\Z)',
-  new_section,
-  content,
-  count=1,
-  flags=re.DOTALL
-)
-
-with open('CHANGELOG.md', 'w') as f:
-  f.write(new_content)
-
-print(f"PASS: Created [{new_version}] section with unreleased content")
-PYTHON_SCRIPT
-      "$NEW_VERSION" "$DATE_NOW" "$OLD_VERSION"
+      python3 .omp/skills/cut-release/scripts/update_changelog.py "$NEW_VERSION" "$DATE_NOW" "$OLD_VERSION"
       ;;
   esac
 

@@ -7,10 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0] — 2026-05-02
+
 ### Added
 
 - `cut-release` skill (`.omp/skills/cut-release/SKILL.md`) — automated release workflow: determine version, update version manifest, validate, commit, create PR, merge, publish GitHub release
-
 
 ## [0.3.0] — 2026-05-02
 

@@ -8,7 +8,7 @@ version: 1.0.0
 
 # Cut Release
 
-Automated release workflow: determine version → update version manifest → validate → commit → create PR → merge → publish GitHub release.
+Automated release workflow: determine version → delegate to cut-release.sh → commit → create PR → merge → publish GitHub release.
 
 ## When to Use
 
@@ -25,9 +25,9 @@ Invoke this skill whenever you are ready to cut a new release. Common triggers:
 
 ---
 
-## Phase 1: Determine Version
+## Phase 1: Determine Version (You do this)
 
-1. **Read current version** from `.template-version` (or project version file):
+1. **Read current version** from `.template-version`:
    ```bash
    cat .template-version
    ```
@@ -48,191 +48,128 @@ Invoke this skill whenever you are ready to cut a new release. Common triggers:
 
 ---
 
-## Phase 2: Discover Version Manifest
+## Phase 2: Execute Release (cut-release.sh does this)
 
-### For the Template Repo
+Run the automation script with the version bump:
 
-The following files carry the template version and must be updated on every release:
-
-| # | File | Pattern | How to Update |
-|---|------|---------|---------------|
-| 1 | `.template-version` | Single line: `X.Y.Z` | Write new version |
-| 2 | `CHANGELOG.md` | `## [Unreleased]` → `## [X.Y.Z] — YYYY-MM-DD` | Edit heading; insert new `[Unreleased]` |
-| 3 | `README.md` | Badge URL: `template-vX.Y.Z` | Replace in badge image URL |
-| 4 | `AGENTS.md` | `version **X.Y.Z**` | Replace version number |
-| 5 | `SETUP_GUIDE.md` | `` `X.Y.Z` `` (template version line) | Replace version number |
-| 6 | `.omp/skills/template-guide/SKILL.md` | Example output: `(X.Y.Z)` | Replace in audit output examples |
-| 7 | `.omp/skills/template-guide/scripts/audit.sh` | `KNOWN="... X.Y.Z"` | Append new version to known list |
-
-### For Template-Derived Repos
-
-When working in a repo scaffolded from `ai-project-template`, the version manifest will differ. Follow these steps to discover and adapt:
-
-**Step 1: Search for current version**
 ```bash
-grep -rn "X.Y.Z" --include='*.md' --include='*.json' --include='*.toml' --include='*.yaml' --include='*.yml' --include='*.sh' --include='*.py' .
+bash .omp/skills/cut-release/scripts/cut-release.sh <OLD_VERSION> <NEW_VERSION>
 ```
 
-**Step 2: Classify common file types**
+**Example:**
+```bash
+bash .omp/skills/cut-release/scripts/cut-release.sh 0.5.0 0.6.0
+```
 
-| File | Language/Tool | Pattern |
-|------|---------------|---------|
-| `package.json` | Node.js | `"version": "X.Y.Z"` |
-| `Cargo.toml` | Rust | `version = "X.Y.Z"` |
-| `pyproject.toml` | Python | `version = "X.Y.Z"` |
-| `setup.py` / `setup.cfg` | Python | `version='X.Y.Z'` |
-| `go.mod` | Go | `module ... vN` (major only) |
-| `*.gemspec` | Ruby | `version = 'X.Y.Z'` |
-| `pom.xml` / `build.gradle` | Java | `<version>X.Y.Z</version>` |
-| `Chart.yaml` | Helm | `version: X.Y.Z` / `appVersion: X.Y.Z` |
-| `Dockerfile` | Docker | Labels or ARGs with version |
+### What the script does:
 
-Template-specific files (always present in template-derived repos):
-- `.template-version` — template version (separate from project version)
-- `CHANGELOG.md` — release history
-- `README.md` — badges, installation instructions
-- `AGENTS.md` — project metadata
-- `audit.sh` — known versions list
+1. **Pre-flight**: Verifies OLD_VERSION exists in all 7 version manifest files. Aborts if any are missing (prevents wrong version being passed).
+2. **Update files**: Replaces version in all manifest files:
+   | File | Pattern |
+   |------|---------|
+   | `.template-version` | whole file content |
+   | `README.md` | `template-vX.Y.Z` in badge |
+   | `AGENTS.md` | `version **X.Y.Z**` |
+   | `SETUP_GUIDE.md` | `` `X.Y.Z` `` |
+   | `.omp/skills/template-guide/SKILL.md` | `(X.Y.Z)` in examples |
+   | `.omp/skills/template-guide/scripts/audit.sh` | KNOWN list entry |
+   | `CHANGELOG.md` | Creates new version section from Unreleased |
 
-**Step 3: Build the manifest**
+3. **Post-flight**: Verifies NEW_VERSION exists in all files and OLD_VERSION is gone.
+4. **Audit**: Runs `audit.sh` — must pass before proceeding.
 
-For each file found in Step 1, record:
-- File path
-- The pattern that contains the version (for search/replace)
-- Whether it's the project version or template version (they may differ)
+### Dry run mode:
 
-**Step 4: Present the manifest to the user for review before proceeding.**
+```bash
+bash .omp/skills/cut-release/scripts/cut-release.sh <OLD> <NEW> --dry-run
+```
+
+Shows what would change without making any modifications.
 
 ---
 
-## Phase 3: Update Files
+## Phase 3: Commit, PR, Merge, Tag, Release (You do this)
 
-### For Each File in the Manifest
-
-1. Search for the old version string
-2. Replace with the new version
-3. Verify the replacement (read the file back)
-
-### For `CHANGELOG.md`
-
-Replace `## [Unreleased]` with:
-```
-## [Unreleased]
-
-## [X.Y.Z] — YYYY-MM-DD
-```
-
-- Keep the entries that were under `[Unreleased]` under the new version header
-- Add a new empty `[Unreleased]` section at the top
-
-### For `audit.sh` (if present)
-
-Append the new version to the `KNOWN` string.
-
----
-
-## Phase 4: Validate
-
-1. Run `audit.sh` — must pass:
+1. **Review changes**:
    ```bash
-   .omp/skills/template-guide/scripts/audit.sh
+   git diff
    ```
 
-2. Verify no stale version references remain:
-   ```bash
-   grep -rn "X.Y.Z" . --include='*.md' --include='*.sh' --include='*.yml'
-   ```
-   Must return zero hits for the old version in version-carrying contexts.
-
-3. Verify `CHANGELOG.md` has both:
-   - `[Unreleased]` (empty or with new entries)
-   - `[X.Y.Z]` (with the released entries)
-
----
-
-## Phase 5: Commit and PR
-
-1. **Commit all version updates**:
+2. **Commit**:
    ```bash
    git add -A
    git commit -m "chore: cut vX.Y.Z"
    ```
 
-2. **Push the branch**:
+3. **Push branch**:
    ```bash
    git push -u origin HEAD
    ```
 
-3. **Create PR**:
+4. **Create PR** (or use `merge-to-main` skill):
    ```bash
    gh pr create --base main --title "chore: cut vX.Y.Z" --body "## Summary
-
-Cut release vX.Y.Z.
-
-## Changes
-
-- Updated version references across $(git diff --stat | tail -1)
-- CHANGELOG.md updated with release section
-
-## Verification
-
-- audit.sh passes
-- No stale version references remain"
+   
+   Cut release vX.Y.Z.
+   
+   ## Changes
+   
+   - Updated version references across all manifest files
+   - CHANGELOG.md updated with release section
+   
+   ## Verification
+   
+   - audit.sh passes
+   - No stale version references remain"
    ```
 
-4. **Babysit CI**: Monitor checks, fix any failures, push fixes, re-poll.
-
-5. **Merge** when all checks pass:
+5. **Monitor CI and merge** when all checks pass:
    ```bash
    gh pr merge <pr-number> --squash
    ```
 
-6. **Switch back to main**:
+6. **Switch to main and pull**:
    ```bash
    git checkout main && git pull
    ```
 
----
-
-## Phase 6: Create GitHub Release
-
-1. **Create annotated tag**:
+7. **Create annotated tag**:
    ```bash
    git tag -a vX.Y.Z -m "Release vX.Y.Z"
    ```
 
-2. **Push tag**:
+8. **Push tag**:
    ```bash
    git push origin vX.Y.Z
    ```
 
-3. **Create GitHub release**:
+9. **Create GitHub release**:
    ```bash
    gh release create vX.Y.Z --title "vX.Y.Z" --notes "<changelog-body>"
    ```
    
-   The release body is the changelog section for this version (everything between `## [X.Y.Z]` and the next `## [` or end of file).
+   The release body should be the changelog section for this version (everything between `## [X.Y.Z]` and the next `## [` or end of file).
 
 ---
 
-## Phase 7: Verify
+## Phase 4: Verify
 
-1. Release exists and is not draft:
+1. **Release exists and is not draft**:
    ```bash
    gh release list
    gh release view vX.Y.Z
    ```
 
-2. Release body matches `CHANGELOG.md`:
-   - Compare `gh release view vX.Y.Z --json body --jq '.body'` with the corresponding section in `CHANGELOG.md`
+2. **Release body matches CHANGELOG.md**:
+   Compare `gh release view vX.Y.Z --json body --jq '.body'` with the corresponding section in `CHANGELOG.md`
 
-3. All manifest files contain the new version:
+3. **All manifest files contain the new version**:
    ```bash
    cat .template-version  # should show new version
    grep "vX.Y.Z" README.md  # should find badge
    ```
 
-4. No stale references to old version remain:
+4. **No stale references to old version remain**:
    ```bash
    grep -rn "vOLD-VERSION" . --include='*.md' --include='*.sh'  # must be empty
    ```
@@ -244,17 +181,16 @@ Cut release vX.Y.Z.
 | Situation | Handling |
 |-----------|----------|
 | Empty `[Unreleased]` section | Abort — nothing to release |
-| Multiple version-like strings | Use anchored patterns, not blanket replace |
-| Pre-release versions | Support `--prerelease` flag for alpha/beta/rc tags |
-| Tag already exists | Detect via `git tag -l vX.Y.Z` and abort if found |
-| Project vs template version differ | Keep them separate; only bump template version unless project also changed |
-| Release PR CI fails | Diagnose and fix like any other PR (see `merge-to-main` skill) |
+| Multiple version-like strings | Use anchored patterns (handled by script) |
+| Tag already exists | Detect via `git tag -l vX.Y.Z` and abort |
+| Wrong version passed | Pre-flight check catches missing OLD_VERSION |
+| Audit fails after update | Script aborts; fix manually before committing |
 
 ---
 
 ## What This Skill Does NOT Do
 
-- Does not write the code or features being released (those are the agent's main tasks)
+- Does not write the code or features being released (those are your main tasks)
 - Does not force-push or rewrite shared history
 - Does not publish to package registries (npm, PyPI, crates.io, etc.)
 - Does not auto-resolve merge conflicts

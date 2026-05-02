@@ -28,7 +28,7 @@ Regex: `<!--\s*(e\.g\.|TODO|FIXME|replace me|fill in|<[^>]+>)`
  `<!-- FIXME` | Known issues not yet addressed |
  `<!-- replace me` | Direct "fill this in" instructions |
  `<!-- fill in` | Same as above |
- `<!-- <anything>` | Generic placeholder comments |
+ `<!-- <...>` | Generic placeholder comments with content between brackets |
 
 ## Scope
 

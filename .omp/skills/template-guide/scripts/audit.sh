@@ -10,7 +10,8 @@ TEMPLATE_VERSION=0.5.0
 set -euo pipefail
 
 # scripts/ → template-guide → skills → .omp → repo-root = 4 levels up
-cd "$(dirname "${BASH_SOURCE[0]}")"
+SCRIPT_DIR="$(cd "$(dirname "${0}")" && pwd)"
+cd "$SCRIPT_DIR"
 cd ../../../..
 
 ERRORS=0
@@ -89,11 +90,12 @@ while IFS= read -r md; do
         TARGET=${PATH_PART#./}
         # Strip URL anchors (#...) before checking file existence
         BASE=${TARGET%%#*}
-        if [ ! -e "$BASE" ]; then
+        # Only check existence if BASE is non-empty (skip pure anchors like "#section")
+        if [[ -n "$BASE" ]] && [ ! -e "$BASE" ]; then
             fail "$md links to missing $BASE"
             LINK_ERRORS=$((LINK_ERRORS + 1))
         fi
-    done < <(grep -oE '\[([^]]+)\]\(\.?/[^)]+\)' "$md" 2>/dev/null || true)
+    done < <(grep -oE '\[([^]]+)\]\([^)]+\)' "$md" 2>/dev/null || true)
 done < <(find . -name '*.md' -type f | sort)
 if [ "$LINK_ERRORS" -eq 0 ]; then
     pass "all internal markdown links resolve"
@@ -120,7 +122,7 @@ check_manifest() {
 check_manifest "README.md" "template-v${VERSION}"
 check_manifest "AGENTS.md" "version \*\*${VERSION}\*\*"
 check_manifest "SETUP_GUIDE.md" "${VERSION}"
-check_manifest ".omp/skills/template-guide/SKILL.md" "${VERSION}"
+check_manifest ".omp/skills/template-guide/SKILL.md" "template-version: ${VERSION}"
 
 # ── Summary ─────────────────────────────────────────────────────────────────
 echo ""

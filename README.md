@@ -48,6 +48,7 @@ cd ai-project-template
 | `.devcontainer/` | DevContainer configuration for VS Code / Codespaces |
 | `.omp/skills/template-guide/` | Template conventions skill for AI agents — navigate, audit, upgrade |
 .omp/skills/merge-to-main/ | PR lifecycle skill — create PR, monitor CI, fix failures, merge when green |
+.omp/skills/cut-release/ | Release cut skill — bump versions, update changelog, create GitHub release |
 | `.template-version` | Current template version tag |
 | `LICENSE` | MIT license |
 

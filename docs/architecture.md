@@ -50,7 +50,7 @@ docs/
 
 | Store | Purpose | Schema |
 |-------|---------|--------|
-| <!-- name --> | <!-- purpose --> | <!-- link or description --> |
+| <!-- name --> | <!-- purpose --> | <!-- schema or link --> |
 
 ## External Integrations
 
@@ -85,5 +85,5 @@ docs/
 
 ## References
 
-- [architecture.md specification](architecture.md) — Architecture-as-code specification
+- [architecture.md specification](https://architecture.md/) — Architecture-as-code specification
 - [docs/agent-files-guide.md](./docs/agent-files-guide.md) — Practical guide for writing effective architecture documentation

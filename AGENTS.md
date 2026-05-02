@@ -159,7 +159,7 @@ Follow [Keep a Changelog](https://keepachangelog.com/). Update `CHANGELOG.md` un
 
 ## Template Version
 
-This project was generated from `ai-project-template` version **0.5.0**. See [`.template-version`](./.template-version) for the current release. Agents can read this file to determine which conventions and files to expect.
+This project was generated from `ai-project-template` version **0.6.0**. See [`.template-version`](./.template-version) for the current release. Agents can read this file to determine which conventions and files to expect.
 
 ## References & Further Reading
 

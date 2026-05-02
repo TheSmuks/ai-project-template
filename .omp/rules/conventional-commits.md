@@ -153,4 +153,15 @@ This is a **TTSR rule** — it only activates when its pattern appears in the ag
 - Targeted enforcement at commit time
 - No interference with general workflow
 
+### Limitations
+
+This TTSR rule has important limitations due to the nature of stream-based detection:
+
+1. **No colon enforcement** — The rule does not check for the required `:` separator after the type. A message like `feat some description` (missing colon) will NOT trigger this rule.
+2. **Single-line check** — The rule only examines the first token. Multi-line messages may not be fully validated.
+3. **Real enforcement via CI** — For complete validation, rely on the `commit-lint.yml` CI workflow, which performs proper conventional commit parsing including the `:` separator.
+
+**Note:** The TTSR rule provides lightweight guidance during development, but CI enforcement (commit-lint.yml) is authoritative.
+
+
 The rule uses a negative lookahead pattern to only trigger when the commit does NOT start with a valid type.

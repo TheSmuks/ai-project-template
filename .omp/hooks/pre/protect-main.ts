@@ -7,8 +7,8 @@
  * Purpose: Blocks direct commits or pushes to main branch
  * 
  * This hook enforces the PR-only convention. When an agent attempts
- * to commit directly to main or push to main, it prompts the user
- * for confirmation before allowing the operation.
+ * to commit directly to main or push to main, it blocks the operation
+ * and instructs the user to use a pull request instead.
  * 
  * HOW TO ADAPT:
  * - To block other branches, add to the protectedBranches array
@@ -95,27 +95,6 @@ function extractTargetBranch(command: string): string | null {
 }
 
 /**
- * Build the user confirmation prompt
- */
-function buildPrompt(command: string, targetBranch: string): string {
-  return [
-    `⚠️  Protected Branch Action Detected`,
-    ``,
-    `Command: \`${command}\``,
-    `Target: \`${targetBranch}\``,
-    ``,
-    `This branch is protected. Direct changes should go through a pull request.`,
-    ``,
-    `Options:`,
-    `  1. Abort this operation (recommended)`,
-    `  2. Create a feature branch and commit there instead`,
-    `  3. Continue anyway (requires explicit user override)`,
-    ``,
-    `Choose an option (1/2/3):`,
-  ].join('\n');
-}
-
-/**
  * The pre-hook implementation
  * 
  * This function is called before a bash tool call executes.
@@ -144,42 +123,14 @@ export const protectMain: OmpPreHook = async (event: ToolCallEvent): Promise<boo
     return true; // Allow if we can't determine the branch
   }
   
-  // Build the prompt for user confirmation
-  const prompt = buildPrompt(command, targetBranch);
+  // Block the operation and provide guidance
+  console.warn(`[protect-main] BLOCKED: Protected branch '${targetBranch}' target detected`);
+  console.warn(`[protect-main] Command: ${command}`);
+  console.warn(`[protect-main] Direct changes to protected branches are not allowed.`);
+  console.warn(`[protect-main] Please create a feature branch and use a pull request instead.`);
+  console.warn(`[protect-main] Suggested: git checkout -b feature/<name> && ${command.replace(/main|master/, 'feature/<name>')}`);
   
-  // Use OMP's ask tool to prompt the user
-  const response = await omp.ask({
-    question: prompt,
-    options: [
-      { id: 'abort', label: 'Abort (recommended)' },
-      { id: 'feature', label: 'Create feature branch' },
-      { id: 'override', label: 'Continue anyway' },
-    ],
-    recommended: 0, // Abort is recommended
-  });
-  
-  switch (response) {
-    case 'abort':
-      // User chose to abort - log and block
-      console.log('[protect-main] Operation aborted by user choice');
-      return false;
-      
-    case 'feature':
-      // Suggest creating a feature branch
-      const suggestedBranch = `feature/protect-${Date.now()}`;
-      console.log(`[protect-main] Suggested branch name: ${suggestedBranch}`);
-      console.log('[protect-main] Run: git checkout -b <branch-name>');
-      return false;
-      
-    case 'override':
-      // User explicitly override - allow with warning
-      console.warn('[protect-main] ⚠️ User override - proceeding with protected branch operation');
-      return true;
-      
-    default:
-      // Default to abort for safety
-      return false;
-  }
+  return false; // Block the operation
 };
 
 /**

@@ -17,18 +17,18 @@ This rule activates via TTSR (zero upfront context cost) when the agent's output
 
 ## Trigger Pattern
 
-Regex: `<!--\s*(e\.g\.|example|TODO|FIXME|replace me|fill in|<[^>]+>)`
+Regex: `<!--\s*(e\.g\.|TODO|FIXME|replace me|fill in|<[^>]+>)`
 
 ### Why This Pattern?
 
 | Pattern | What It Catches |
-|---------|-----------------|
-| `<!-- e.g.` | Common template indicator ("for example...") |
-| `<!-- TODO` | Incomplete sections left for later |
-| `<!-- FIXME` | Known issues not yet addressed |
-| `<!-- replace me` | Direct "fill this in" instructions |
-| `<!-- fill in` | Same as above |
-| `<!-- <anything>` | Generic placeholder comments |
+---------|-----------------|
+ `<!-- e.g.` | Common template indicator ("for example...") |
+ `<!-- TODO` | Incomplete sections left for later |
+ `<!-- FIXME` | Known issues not yet addressed |
+ `<!-- replace me` | Direct "fill this in" instructions |
+ `<!-- fill in` | Same as above |
+ `<!-- <anything>` | Generic placeholder comments |
 
 ## Scope
 

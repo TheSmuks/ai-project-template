@@ -15,22 +15,20 @@ Ensures that any user-facing change to the codebase is accompanied by a `CHANGEL
 
 The rule activates when the agent edits or writes to files that represent user-facing surfaces:
 
-### Scope Pattern
-
 ```
 tool:write(**/*.{ts,js,py,go,rs,md,json,yaml,yml})
 tool:edit(**/*.{ts,js,py,go,rs,md,json,yaml,yml})
+exclude:
+  - "**/test/**"
+  - "**/*.test.*"
+  - "**/*.spec.*"
+  - "**/CHANGELOG.md"
+  - "**/scripts/**"
+  - "**/tools/**"
+  - ".github/workflows/**"
+  - "docs/**"
 ```
 
-### Excluded from Scope
-
-This rule does **NOT** apply to:
-- Test files (`**/test/**`, `**/*.test.*`, `**/*.spec.*`)
-- Internal tooling (`scripts/`, `tools/`, `.github/workflows/`)
-- Configuration files that don't affect user behavior
-- Documentation files (user guides live in docs/, not CHANGELOG.md)
-
-## The Reminder
 
 When this rule activates, the agent should:
 

@@ -59,7 +59,7 @@ done
 echo "Checking .template-version..."
 if [ -f ".template-version" ]; then
     VERSION=$(cat .template-version | tr -d '[:space:]')
-    KNOWN="0.1.0 0.2.0 0.3.0"
+    KNOWN="0.1.0 0.2.0 0.3.0 0.4.0"
     if echo "$KNOWN" | grep -qw "$VERSION"; then
         pass ".template-version matches known release ($VERSION)"
     else

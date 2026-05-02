@@ -105,7 +105,7 @@ $ .omp/skills/template-guide/scripts/audit.sh
 Checking AGENTS.md for placeholders... PASS: no placeholders found
 Checking required files... PASS: all required files present
 Checking CI workflows... PASS: all workflow files present
-Checking .template-version... PASS: version matches known release (0.3.0)
+Checking .template-version... PASS: version matches known release (0.4.0)
 Checking markdown internal links... PASS: all links resolve
 ```
 
@@ -114,7 +114,7 @@ Checking markdown internal links... PASS: all links resolve
 ```
 $ .omp/skills/template-guide/scripts/audit.sh
 Checking AGENTS.md for placeholders... FAIL: 3 placeholders remaining at lines 10, 14, 47
-Checking .template-version... PASS: version matches known release (0.3.0)
+Checking .template-version... PASS: version matches known release (0.4.0)
 Checking markdown internal links... FAIL: docs/ci.md links to missing ./docs/nonexistent.md
 ```
 

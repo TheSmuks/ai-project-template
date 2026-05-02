@@ -454,9 +454,27 @@ Tiger Style principles apply regardless of language:
 - [A Philosophy of Software Design](https://web.stanford.edu/~ouster/cgi-bin/book.php) — On naming, functions, and code organization
 - [The Art of UNIX Programming](http://www.catb.org/~esr/writings/taoup/html/) — On simplicity and doing one thing well
 
+## F. OMP Extensions
+
+**New to OMP?** See [omp-extensions-guide.md](omp-extensions-guide.md) for a decision guide covering agents, commands, skills, rules, hooks, and tools.
+
+This guide covers `AGENTS.md`, `ARCHITECTURE.md`, and `SKILL.md`. For the six OMP extension types in `.omp/`, see the extensions guide.
+
+The extensions guide includes:
+- Quick decision matrix (which type solves which problem)
+- Type catalog with examples from this repo
+- Common scenarios resolved to the right type
+- Migration paths when something outgrows its type
+
+Key distinction: **Agents, Commands, and Skills** are prompt-based capabilities. **Rules and Hooks** intercept and modify agent behavior. **Tools** extend the callable toolset.
+
+For the `.omp/` directory structure and format specs:
+- [omp-extensions-guide.md](omp-extensions-guide.md)
+- [Oh My Pi documentation](https://github.com/can1357/oh-my-pi/tree/main/docs)
+
 ---
 
-## F. References
+## G. References
 
 ### Specification Links
 
@@ -475,7 +493,7 @@ Tiger Style principles apply regardless of language:
 ### Related Template Documentation
 
 - [AGENTS.md](./AGENTS.md) — Project context template
-- [docs/architecture.md](./docs/architecture.md) — Architecture documentation template
+- [docs/architecture.md](architecture.md) — Architecture documentation template
 - [SETUP_GUIDE.md](./SETUP_GUIDE.md) — New project setup guide
 - [ADOPTING.md](./ADOPTING.md) — Existing project adoption guide
-- [docs/ci.md](./docs/ci.md) — CI/CD configuration guide
+- [docs/ci.md](ci.md) — CI/CD configuration guide- [omp-extensions-guide.md](omp-extensions-guide.md) — OMP extension types guide

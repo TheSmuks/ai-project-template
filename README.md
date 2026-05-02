@@ -1,35 +1,43 @@
 # ai-project-template
 
-Opinionated starter template for AI-assisted development projects. Ships with agent-aware project structure, ready-made CI workflows, code quality thresholds, and documentation templates — everything you need to scaffold a well-behaved codebase that AI coding agents can navigate effectively.
+<div align="center">
 
-[![Changelog](https://img.shields.io/badge/changelog-Keep%20a%20Changelog-blue.svg)](./CHANGELOG.md)
-[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
-![Template](https://img.shields.io/badge/template-v0.5.0-blueviolet.svg)](./.template-version)
-[![Use this template](https://img.shields.io/badge/use%20this%20template-Deploy-green?logo=github)](https://github.com/TheSmuks/ai-project-template/generate)
+**Opinionated starter template for AI-assisted development projects.** Ships with agent-aware project structure, ready-made CI workflows, code quality thresholds, and documentation templates — everything you need to scaffold a well-behaved codebase that AI coding agents can navigate effectively.
+
+[![Changelog](https://img.shields.io/badge/changelog-Keep%20a%20Changelog-blue.svg?style=flat-square)](./CHANGELOG.md)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](./LICENSE)
+[![Template](https://img.shields.io/badge/template-v0.5.0-blueviolet.svg?style=flat-square)](./.template-version)
+[![Use this template](https://img.shields.io/badge/use%20this%20template-Deploy-green?logo=github&style=flat-square)](https://github.com/TheSmuks/ai-project-template/generate)
+
+<a href="https://github.com/TheSmuks/ai-project-template/generate"><img src="https://img.shields.io/badge/-Use%20this%20template-2ea44f?style=for-the-badge" alt="Use this template" /></a>
+<a href="./SETUP_GUIDE.md"><img src="https://img.shields.io/badge/-Read%20the%20Docs-21759b?style=for-the-badge&logo=readme" alt="Read the Docs" /></a>
+
+</div>
+
+## About
+
+AI coding agents (OMP, Codex, Cursor, Aider, and others) excel at implementation but struggle with project-level context — conventions, structure, and intent. This template bridges that gap by baking best practices directly into the project skeleton. Ships with `AGENTS.md`, pre-configured CI, code quality thresholds, and documentation templates, so agents can contribute effectively from day one.
 
 ## Features
 
-- **Agent-aware project structure** — Standardized layout with `AGENTS.md`, `SKILL.md` patterns, and agent skills integration. AI coding agents (OMP, Codex, Cursor, Aider, and others) can navigate and contribute effectively from day one.
-- **Ready-made CI workflows** — Opinionated GitHub Actions pipelines for linting, type-checking, testing, commit linting, changelog enforcement, and file size policy — no configuration required.
-- **Code quality thresholds** — Module size guidelines, function length limits, nesting depth rules, and module export counts built into project documentation. Quality gates enforced by CI.
-- **Two adoption paths** — Designed for both greenfield projects (via `SETUP_GUIDE.md`) and existing repositories (via `ADOPTING.md`). Incrementally adopt only what you need.
-- **Devcontainer configuration** — Pre-configured `.devcontainer/` with everything in place for VS Code Dev Containers or GitHub Codespaces.
-- **Documentation templates** — `CHANGELOG.md`, `CONTRIBUTING.md`, `AGENTS.md`, `docs/architecture.md`, and `docs/agent-files-guide.md` included and pre-formatted.
-- **Conventional commit enforcement** — CI rejects commits that don't follow [Conventional Commits](https://www.conventionalcommits.org/). Branch naming follows [Conventional Branch](https://github.com/nickshanks347/conventional-branch).
-- **Tiger Style principles** — Built-in engineering guidelines for high-reliability systems: assertions, bounded operations, zero tech debt.
+| | |
+|---|---|
+| **Agent-aware project structure** — Standardized layout with `AGENTS.md`, `SKILL.md` patterns, and agent skills integration. AI coding agents can navigate and contribute effectively from day one. | **Ready-made CI workflows** — Opinionated GitHub Actions pipelines for linting, type-checking, testing, commit linting, changelog enforcement, and file size policy — no configuration required. |
+| **Code quality thresholds** — Module size guidelines, function length limits, nesting depth rules, and module export counts built into project documentation. Quality gates enforced by CI. | **Two adoption paths** — Designed for both greenfield projects (via `SETUP_GUIDE.md`) and existing repositories (via `ADOPTING.md`). Incrementally adopt only what you need. |
+| **Devcontainer configuration** — Pre-configured `.devcontainer/` with everything in place for VS Code Dev Containers or GitHub Codespaces. | **Documentation templates** — `CHANGELOG.md`, `CONTRIBUTING.md`, `AGENTS.md`, `docs/architecture.md`, and `docs/agent-files-guide.md` included and pre-formatted. |
+| **Conventional commit enforcement** — CI rejects commits that don't follow [Conventional Commits](https://www.conventionalcommits.org/). Branch naming follows [Conventional Branch](https://github.com/nickshanks347/conventional-branch). | **Tiger Style principles** — Built-in engineering guidelines for high-reliability systems: assertions, bounded operations, zero tech debt. |
 
-## Quick Start
+## Getting Started
 
-```bash
-# Option 1: Clone the repository
-git clone https://github.com/TheSmuks/ai-project-template.git
-cd ai-project-template
-
-# Option 2: Click "Use this template" on GitHub
-# https://github.com/TheSmuks/ai-project-template/generate
-```
+| New Project | Existing Project |
+|---|---|
+| Start fresh with a fully configured project. Follow [SETUP_GUIDE.md](./SETUP_GUIDE.md) to customize metadata, install dependencies, and configure your first CI run. | Integrate incrementally into an existing repository. Follow [ADOPTING.md](./ADOPTING.md) to merge conventions and CI workflows without breaking your current workflow. |
+| <a href="./SETUP_GUIDE.md"><img src="https://img.shields.io/badge/-Setup%20Guide-2ea44f?style=flat-square" alt="Setup Guide" /></a> | <a href="./ADOPTING.md"><img src="https://img.shields.io/badge/-Adoption%20Guide-21759b?style=flat-square" alt="Adoption Guide" /></a> |
 
 ## What's Included
+
+<details>
+<summary>Full file listing</summary>
 
 | File / Directory | Purpose |
 |---|---|
@@ -47,20 +55,12 @@ cd ai-project-template
 | `docs/ci.md` | CI/CD workflow documentation |
 | `.devcontainer/` | DevContainer configuration for VS Code / Codespaces |
 | `.omp/skills/template-guide/` | Template conventions skill for AI agents — navigate, audit, upgrade |
-.omp/skills/merge-to-main/ | PR lifecycle skill — create PR, monitor CI, fix failures, merge when green |
-.omp/skills/cut-release/ | Release cut skill — bump versions, update changelog, create GitHub release |
+| `.omp/skills/merge-to-main/` | PR lifecycle skill — create PR, monitor CI, fix failures, merge when green |
+| `.omp/skills/cut-release/` | Release cut skill — bump versions, update changelog, create GitHub release |
 | `.template-version` | Current template version tag |
 | `LICENSE` | MIT license |
 
-## Two Paths
-
-This template supports two adoption strategies:
-
-### New Project
-Follow [SETUP_GUIDE.md](./SETUP_GUIDE.md) to set up a new project from scratch. It covers customizing project metadata, installing dependencies, and initial configuration.
-
-### Existing Project
-Follow [ADOPTING.md](./ADOPTING.md) for incremental adoption. It describes which files to merge, which to adapt, and how to adopt conventions without breaking your current workflow.
+</details>
 
 ## Documentation
 

@@ -493,7 +493,7 @@ For the `.omp/` directory structure and format specs:
 ### Related Template Documentation
 
 - [AGENTS.md](./AGENTS.md) — Project context template
-- [docs/architecture.md](https://architecture.md/) — Architecture documentation template
+- [architecture.md spec](https://architecture.md/) — Architecture-as-code specification
 - [SETUP_GUIDE.md](./SETUP_GUIDE.md) — New project setup guide
 - [ADOPTING.md](./ADOPTING.md) — Existing project adoption guide
 - [docs/ci.md](./docs/ci.md) — CI/CD configuration guide

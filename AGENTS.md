@@ -105,11 +105,12 @@ CI uses separate workflow files, one concern per file. See [docs/ci.md](./docs/c
 | `commit-lint.yml` | Conventional commit enforcement |
 | `changelog-check.yml` | Changelog update enforcement (PRs only) |
 | `blob-size-policy.yml` | Rejects oversized files (PRs only) |
- `branch-cleanup.yml` | Deletes merged feature branches |
+| `branch-cleanup.yml` | Deletes merged feature branches |
+
 When adding new CI checks:
 - Project-specific jobs (coverage, deploy) go in `ci.yml`
 - Cross-cutting policies (commit style, size limits) get their own workflow file
-- All workflows must have `permissions: contents: read` and a `concurrency` group
+- All workflows use least-privilege `permissions`. Most use `contents: read`; workflows that need write access (like branch-cleanup) declare only the permissions they need. All workflows have a `concurrency` group.
 
 ## Agent Behavior
 
@@ -156,7 +157,6 @@ Examples: `feature/add-embeddings`, `fix/token-overflow`, `chore/update-deps`
 
 Follow [Keep a Changelog](https://keepachangelog.com/). Update `CHANGELOG.md` under `[Unreleased]` for every user-facing change.
 
-
 ## Template Version
 
 This project was generated from `ai-project-template` version **0.5.0**. See [`.template-version`](./.template-version) for the current release. Agents can read this file to determine which conventions and files to expect.
@@ -166,6 +166,6 @@ This project was generated from `ai-project-template` version **0.5.0**. See [`.
 - [architecture.md](https://architecture.md/) — Architecture-as-code specification
 - [agentskills.io/specification](https://agentskills.io/specification) — Agent skills specification
 - [agents.md](https://agents.md/) — AGENTS.md open format specification
-- [Oh My Pi documentation](https://github.com/can1357/oh-my-pi/tree/main/docs) — Oh My Pi harness documentation
+- [Oh My Pi documentation](https://github.com/can1357/oh-my-pi/tree/main/docs) — OMP harness documentation
 - [docs/agent-files-guide.md](./docs/agent-files-guide.md) — Practical guide for writing AGENTS.md, ARCHITECTURE.md, and SKILL.md
 - [Tiger Style (TigerBeetle)](https://github.com/tigerbeetle/tigerbeetle/blob/main/docs/TIGER_STYLE.md) — Engineering principles for high-reliability systems

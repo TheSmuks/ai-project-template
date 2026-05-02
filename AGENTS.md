@@ -115,7 +115,7 @@ When adding new CI checks:
 
 When an AI agent is working in this repository:
 
-Agents can invoke the `template-guide` skill (`.omp/skills/template-guide/SKILL.md`) to look up conventions, audit compliance, or get upgrade guidance. Agents can also invoke the `merge-to-main` skill (`.omp/skills/merge-to-main/SKILL.md`) to automate the PR lifecycle after completing feature work.
+Agents can invoke the `template-guide` skill (`.omp/skills/template-guide/SKILL.md`) to look up conventions, audit compliance, or get upgrade guidance. Agents can also invoke the `merge-to-main` skill (`.omp/skills/merge-to-main/SKILL.md`) to automate the PR lifecycle after completing feature work, and the `cut-release` skill (`.omp/skills/cut-release/SKILL.md`) to cut a new release with proper version bumping and GitHub release creation.
 
 1. **Always create PRs for changes.** Do not push directly to `main`.
 2. **Run available validation before requesting review.** Execute lint, type-check, and test commands before declaring work complete.

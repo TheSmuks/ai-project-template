@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.0] — 2026-05-02
+
+### Added
+
+- `.omp/rules/no-placeholders.md` — TTSR rule to catch HTML comment placeholders in template files
+- `.omp/rules/changelog-required.md` — Scope-based rule reminding agents to update CHANGELOG.md for user-facing changes
+- `.omp/rules/conventional-commits.md` — TTSR rule enforcing conventional commit message format
+- `.omp/hooks/pre/protect-main.ts` — Pre-hook blocking direct commits/pushes to protected branches (main, master)
+- `.omp/hooks/post/template-compliance-hint.ts` — Post-hook logging audit hints after template-critical file changes
+- `.omp/tools/template-audit/index.ts` — Custom tool wrapping audit.sh with structured output for agent consumption
+- `.omp/skills/setup/SKILL.md` — Interactive setup skill with multi-step feature selection workflow
+- `docs/omp-extensions-guide.md` — Decision guide covering all 6 OMP extension types with examples from this repo
+
+### Changed
+
+- `docs/agent-files-guide.md` — Added Section F: OMP Extensions cross-reference guide
+- `docs/agent-files-guide.md` — Renumbered References to Section G
+- Internal link paths fixed in documentation files (relative paths corrected)
+
 ## [0.4.0] — 2026-05-02
 
 ### Added

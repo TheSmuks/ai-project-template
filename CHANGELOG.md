@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- `branch-cleanup.yml` — requires `contents: write` permission to delete branches via Git refs API
+
 ## [0.3.0] — 2026-05-02
 
 ### Added
@@ -19,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rewrite `README.md` with template-specific content (replaces empty placeholders)
 - Add "Use this template" badge
 - `README.md` and `AGENTS.md` updated to mention `merge-to-main` skill
+
 ## [0.2.0] — 2026-05-01
 
 ### Added

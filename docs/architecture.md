@@ -86,4 +86,4 @@ docs/
 ## References
 
 - [architecture.md specification](architecture.md) — Architecture-as-code specification
-- [docs/agent-files-guide.md](./agent-files-guide.md) — Practical guide for writing effective architecture documentation
+- [docs/agent-files-guide.md](./docs/agent-files-guide.md) — Practical guide for writing effective architecture documentation

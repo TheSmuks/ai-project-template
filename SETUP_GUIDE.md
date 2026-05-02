@@ -157,6 +157,11 @@ Agent files use the OMP agent format. Each has:
 
 ### 11. Create docs/decisions/0001-initial-architecture.md
 
+### 12. (Optional) Review the template-guide skill
+
+The `.omp/skills/template-guide/` skill helps AI agents navigate template conventions, audit compliance, and guide future upgrades. Keep it if you want AI agents to have structured access to template knowledge.
+
+
 Use the ADR template at `docs/decisions/0000-template.md` to write your first Architecture Decision Record documenting the initial technology choices and architecture.
 
 ## Files to Remove

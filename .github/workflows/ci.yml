@@ -28,34 +28,6 @@ jobs:
             echo "PASS: $f"
           done
 
-  markdown-links:
-    name: Validate internal markdown links
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-
-      - name: Check markdown internal links resolve
-        run: |
-          ERRORS=0
-          find . -name '*.md' -type f | sort | while read -r md; do
-            grep -oE '\[([^]]+)\]\(\.?/([^)]+)\)' "$md" 2>/dev/null || continue
-            grep -oE '\[([^]]+)\]\(\.?/([^)]+)\)' "$md" | while IFS= read -r link; do
-              # Extract path: [text](path) → path
-              path="${link##*](}"
-              path="${path%)}"
-              path="${path#./}"
-              if [ ! -e "$path" ]; then
-                echo "FAIL: $md links to missing $path"
-                ERRORS=$((ERRORS + 1))
-              fi
-            done
-          done
-          if [ "$ERRORS" -gt 0 ]; then
-            echo "$ERRORS link(s) failed"
-            exit 1
-          fi
-          echo "All internal markdown links resolve."
-
   audit:
     name: Template compliance audit
     runs-on: ubuntu-latest

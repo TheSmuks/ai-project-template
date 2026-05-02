@@ -10,6 +10,7 @@ This project uses separate GitHub Actions workflow files, one concern per file. 
 | `commit-lint.yml` | Enforce conventional commit messages |
 | `changelog-check.yml` | Require changelog entries on pull requests |
 | `blob-size-policy.yml` | Reject large files in pull requests |
+| `branch-cleanup.yml` | Delete merged feature branches |
 
 ## 2. Workflow Structure
 
@@ -53,7 +54,18 @@ on:
     branches: [main]
 ```
 
-Every workflow declares:
+```yaml
+# branch-cleanup.yml — PR closed
+on:
+  pull_request:
+    types: [closed]
+```
+
+Most workflows trigger on `push` and `pull_request` to `main`. The `changelog-check` and `blob-size-policy` workflows run only on pull requests, since their policies only apply to code under review. The `branch-cleanup` workflow triggers when a pull request is closed (merged or not), and the job only runs if the PR was actually merged.
+
+### Permissions
+
+All workflows declare a `concurrency` group:
 
 ```yaml
 permissions:
@@ -65,6 +77,7 @@ concurrency:
 ```
 
 - **`permissions: contents: read`** — least-privilege default. No workflow can write to the repository unless explicitly granted.
+- **`permissions: contents: write`** — required for workflows that modify repository state. `branch-cleanup.yml` needs write access to delete branches via the GitHub API.
 - **`concurrency`** — cancels superseded runs for the same branch or PR, reducing queue time and resource consumption.
 
 ## 3. Caching Strategies
@@ -280,7 +293,7 @@ Callers read outputs from the job's `outputs` context: `${{ needs.test.outputs.c
 ### Where to add new checks
 
 - **Project-specific checks** (lint, test, coverage, deploy) → add jobs to `ci.yml`.
-- **Cross-cutting policy** (commit style, changelog, file size limits) → create a separate workflow file.
+- **Cross-cutting policy** (commit style, changelog, file size limits, branch management) → create a separate workflow file.
 
 ### Example: adding a coverage job to `ci.yml`
 
@@ -348,6 +361,7 @@ Copy the individual `.yml` files into `.github/workflows/`:
 .github/workflows/commit-lint.yml
 .github/workflows/changelog-check.yml
 .github/workflows/blob-size-policy.yml
+.github/workflows/branch-cleanup.yml
 ```
 
 These workflows run independently alongside any existing workflows. No conflicts, no integration effort. Remove them by deleting the files.

@@ -63,7 +63,7 @@ Replace the template content with:
 
 ### 3. Fill in ARCHITECTURE.md
 
-Replace the placeholder with. For concrete examples and structural guidance, see [docs/agent-files-guide.md](./docs/agent-files-guide.md#c-architecturemd).
+Replace the placeholder with your architecture details. For concrete examples and structural guidance, see [docs/agent-files-guide.md](./docs/agent-files-guide.md#c-architecturemd).
 
 - High-level architecture overview
 - Key components and their responsibilities

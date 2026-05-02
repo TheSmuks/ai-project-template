@@ -1,0 +1,28 @@
+name: Branch Cleanup
+
+on:
+  pull_request:
+    types: [closed]
+
+permissions:
+  contents: read
+
+jobs:
+  delete-branch:
+    name: Delete merged branch
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    steps:
+      - name: Delete branch
+        run: |
+          BRANCH_NAME="${{ github.event.pull_request.head.ref }}"
+          # Guard against deleting main or protected branches
+          case "$BRANCH_NAME" in
+            main|master|develop) echo "Skipping protected branch: $BRANCH_NAME"; exit 0 ;;
+          esac
+          gh api \
+            --method DELETE \
+            "repos/${{ github.repository }}/git/refs/heads/$BRANCH_NAME" \
+            --jq '.'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

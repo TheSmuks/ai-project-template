@@ -7,11 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] — 2026-05-02
+
+### Added
+
+- `merge-to-main` skill (`.omp/skills/merge-to-main/SKILL.md`) — automates PR lifecycle: create, monitor CI, fix failures, update checkboxes, merge
+- `branch-cleanup.yml` workflow — auto-deletes feature branches after PR is merged
+
 ### Changed
 
 - Rewrite `README.md` with template-specific content (replaces empty placeholders)
 - Add "Use this template" badge
-
+- `README.md` and `AGENTS.md` updated to mention `merge-to-main` skill
 ## [0.2.0] — 2026-05-01
 
 ### Added

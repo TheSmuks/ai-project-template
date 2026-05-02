@@ -5,7 +5,7 @@ This document guides an AI agent (or human) through customizing the `ai-project-
 
 
 ## What This Template Is
-> **Template version:** `0.4.0` — see [`.template-version`](./.template-version) for the current release.
+> **Template version:** `0.5.0` — see [`.template-version`](./.template-version) for the current release.
 
 This is a **scaffolding structure**, not a project. Most files contain HTML-comment placeholders (`<!-- ... -->`) that must be filled in with project-specific values. The template provides:
 

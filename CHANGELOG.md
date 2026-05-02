@@ -8,9 +8,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.6.0] — 2026-05-02
 
+### Fixed
+
+- `ci.yml` — Removed broken `markdown-links` job (subshell pipe bug caused it to always exit 0 regardless of link check results). Link checking is now handled exclusively by the `audit` job.
+- `AGENTS.md` — Fixed CI/CD table: added missing leading pipe on `branch-cleanup.yml` row and blank line after table.
+- `AGENTS.md` — Qualified permissions statement (branch-cleanup needs `contents: write`, not all workflows use read-only).
+- `AGENTS.md` — Removed extra blank line between Changelog and Template Version sections.
+
+### Changed
+
+- `docs/ci.md` — Added `branch-cleanup.yml` to overview table, trigger model section with YAML example, permissions docs explaining write access, adoption checklist updated to include branch-cleanup.
+- `docs/agent-files-guide.md` — Fixed misleading link text (`docs/architecture.md` → `architecture.md spec`) to accurately reflect its external spec URL.
+
 ### Added
 
-- Automation scripts for cut-release workflow
+- `cut-release` skill scripts for automated release workflow.
+
 
 ## [Unreleased]
 

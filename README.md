@@ -21,18 +21,18 @@ AI coding agents (OMP, Codex, Cursor, Aider, and others) excel at implementation
 ## Features
 
 | | |
-|---|---|
-| **Agent-aware project structure** — Standardized layout with `AGENTS.md`, `SKILL.md` patterns, and agent skills integration. AI coding agents can navigate and contribute effectively from day one. | **Ready-made CI workflows** — Opinionated GitHub Actions pipelines for linting, type-checking, testing, commit linting, changelog enforcement, and file size policy — no configuration required. |
-| **Code quality thresholds** — Module size guidelines, function length limits, nesting depth rules, and module export counts built into project documentation. Quality gates enforced by CI. | **Two adoption paths** — Designed for both greenfield projects (via `SETUP_GUIDE.md`) and existing repositories (via `ADOPTING.md`). Incrementally adopt only what you need. |
-| **Devcontainer configuration** — Pre-configured `.devcontainer/` with everything in place for VS Code Dev Containers or GitHub Codespaces. | **Documentation templates** — `CHANGELOG.md`, `CONTRIBUTING.md`, `AGENTS.md`, `docs/architecture.md`, and `docs/agent-files-guide.md` included and pre-formatted. |
-| **Conventional commit enforcement** — CI rejects commits that don't follow [Conventional Commits](https://www.conventionalcommits.org/). Branch naming follows [Conventional Branch](https://github.com/nickshanks347/conventional-branch). | **Tiger Style principles** — Built-in engineering guidelines for high-reliability systems: assertions, bounded operations, zero tech debt. |
+---|---:|
+ **Agent-aware project structure** — Standardized layout with `AGENTS.md`, `SKILL.md` patterns, and agent skills integration. AI coding agents can navigate and contribute effectively from day one. | **Ready-made CI workflows** — Opinionated GitHub Actions pipelines for linting, type-checking, testing, commit linting, changelog enforcement, and file size policy — no configuration required. |
+ **Code quality thresholds** — Module size guidelines, function length limits, nesting depth rules, and module export counts built into project documentation. Quality gates enforced by CI. | **Two adoption paths** — Designed for both greenfield projects (via `SETUP_GUIDE.md`) and existing repositories (via `ADOPTING.md`). Incrementally adopt only what you need. |
+ **Devcontainer configuration** — Pre-configured `.devcontainer/` with everything in place for VS Code Dev Containers or GitHub Codespaces. | **Documentation templates** — `CHANGELOG.md`, `CONTRIBUTING.md`, `AGENTS.md`, `docs/architecture.md`, and `docs/agent-files-guide.md` included and pre-formatted. |
+ **Conventional commit enforcement** — CI rejects commits that don't follow [Conventional Commits](https://www.conventionalcommits.org/). Branch naming follows [Conventional Branch](https://github.com/nickshanks347/conventional-branch). | **Tiger Style principles** — Built-in engineering guidelines for high-reliability systems: assertions, bounded operations, zero tech debt. |
 
 ## Getting Started
 
-| New Project | Existing Project |
-|---|---|
-| Start fresh with a fully configured project. Follow [SETUP_GUIDE.md](./SETUP_GUIDE.md) to customize metadata, install dependencies, and configure your first CI run. | Integrate incrementally into an existing repository. Follow [ADOPTING.md](./ADOPTING.md) to merge conventions and CI workflows without breaking your current workflow. |
-| <a href="./SETUP_GUIDE.md"><img src="https://img.shields.io/badge/-Setup%20Guide-2ea44f?style=flat-square" alt="Setup Guide" /></a> | <a href="./ADOPTING.md"><img src="https://img.shields.io/badge/-Adoption%20Guide-21759b?style=flat-square" alt="Adoption Guide" /></a> |
+ New Project | Existing Project |
+---|---:|
+ Start fresh with a fully configured project. Follow [SETUP_GUIDE.md](./SETUP_GUIDE.md) to customize metadata, install dependencies, and configure your first CI run. | Integrate incrementally into an existing repository. Follow [ADOPTING.md](./ADOPTING.md) to merge conventions and CI workflows without breaking your current workflow. |
+ <a href="./SETUP_GUIDE.md"><img src="https://img.shields.io/badge/-Setup%20Guide-2ea44f?style=flat-square" alt="Setup Guide" /></a> | <a href="./ADOPTING.md"><img src="https://img.shields.io/badge/-Adoption%20Guide-21759b?style=flat-square" alt="Adoption Guide" /></a> |
 
 ## What's Included
 

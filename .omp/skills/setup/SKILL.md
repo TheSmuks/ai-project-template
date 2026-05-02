@@ -202,7 +202,7 @@ Prompt: "Include ADR (Architecture Decision Record) process?"
 
 ```
 ✓ docs/decisions/               — Decision log directory
-✓ docs/decisions/adr-template.md — Template for new ADRs
+✓ docs/decisions/0000-template.md — Template for new ADRs
 ```
 
 ### Git Ignore

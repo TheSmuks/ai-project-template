@@ -15,8 +15,8 @@ cd ../../../..
 
 ERRORS=0
 
-pass() { echo "PASS: $*"; }
-fail() { echo "FAIL: $*" >&2; ERRORS=$((ERRORS + 1)); }
+pass() { echo "[PASS] $*"; }
+fail() { echo "[FAIL] $*" >&2; ERRORS=$((ERRORS + 1)); }
 
 # ── 1. AGENTS.md: no HTML comment placeholders ──────────────────────────────
 echo "Checking AGENTS.md for placeholders..."

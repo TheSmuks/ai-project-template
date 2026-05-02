@@ -496,4 +496,5 @@ For the `.omp/` directory structure and format specs:
 - [docs/architecture.md](architecture.md) — Architecture documentation template
 - [SETUP_GUIDE.md](./SETUP_GUIDE.md) — New project setup guide
 - [ADOPTING.md](./ADOPTING.md) — Existing project adoption guide
-- [docs/ci.md](ci.md) — CI/CD configuration guide- [omp-extensions-guide.md](omp-extensions-guide.md) — OMP extension types guide
+- [docs/ci.md](ci.md) — CI/CD configuration guide
+- [omp-extensions-guide.md](omp-extensions-guide.md) — OMP extension types guide

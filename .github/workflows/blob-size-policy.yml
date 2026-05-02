@@ -2,7 +2,7 @@ name: Blob Size Policy
 
 on:
   pull_request:
-    types: [opened, synchronize]
+ types: [opened, synchronize, reopened]
 
 concurrency:
   group: blob-size-policy-${{ github.ref }}

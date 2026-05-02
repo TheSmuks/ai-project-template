@@ -46,6 +46,7 @@ cd ai-project-template
 | `docs/agent-files-guide.md` | Practical guide for writing AGENTS.md, ARCHITECTURE.md, and SKILL.md |
 | `docs/ci.md` | CI/CD workflow documentation |
 | `.devcontainer/` | DevContainer configuration for VS Code / Codespaces |
+| `.omp/skills/template-guide/` | Template conventions skill for AI agents — navigate, audit, upgrade |
 | `.template-version` | Current template version tag |
 | `LICENSE` | MIT license |
 
@@ -63,6 +64,7 @@ Follow [ADOPTING.md](./ADOPTING.md) for incremental adoption. It describes which
 
 - [SETUP_GUIDE.md](./SETUP_GUIDE.md) — Getting started for new projects
 - [ADOPTING.md](./ADOPTING.md) — Incremental adoption for existing repos
+- [UPGRADING.md](./UPGRADING.md) — Re-sync guide for upgrading from older template versions
 - [CONTRIBUTING.md](./CONTRIBUTING.md) — Development guidelines
 - [docs/architecture.md](./docs/architecture.md) — Architecture specification template
 - [docs/agent-files-guide.md](./docs/agent-files-guide.md) — Guide for agent configuration files

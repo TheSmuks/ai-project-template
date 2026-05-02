@@ -2,6 +2,7 @@
 
 This guide is for teams who already have a codebase and want to bring in the conventions, structure, and agent configuration from `ai-project-template` — without disrupting existing workflows.
 
+> **If you're already using the template and want to update to a newer version**, see [UPGRADING.md](./UPGRADING.md) instead.
 > **If you just cloned this template to start a new project, you're in the wrong place.** See [SETUP_GUIDE.md](./SETUP_GUIDE.md) instead.
 
 ---

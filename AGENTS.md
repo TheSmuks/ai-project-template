@@ -15,6 +15,9 @@ This file is auto-discovered by AI coding agents (OMP, Codex, Cursor, Aider, Jul
 
 ## Build & Run
 
+
+- **Install pre-commit hooks:** `pip install pre-commit && pre-commit install`
+
 <!-- Fill in the commands for your project. Remove what doesn't apply. -->
 
 ```bash
@@ -103,15 +106,18 @@ CI uses separate workflow files, one concern per file. See [docs/ci.md](./docs/c
 |----------|--------|
 | `ci.yml` | Lint, typecheck, test — project-specific jobs |
 | `commit-lint.yml` | Conventional commit enforcement |
-| `changelog-check.yml` | Changelog update enforcement (PRs only) |
+| `changelog-check.yml` | Changelog format validation (PRs only) |
 | `blob-size-policy.yml` | Rejects oversized files (PRs only) |
 | `branch-cleanup.yml` | Deletes merged feature branches |
+| `branch-lint.yml` | Enforces branch naming conventions (PRs only) |
+
+**Pre-commit hooks** run locally before commits are accepted:
+```bash
+pip install pre-commit && pre-commit install
+```
+This enforces conventional commit format at the commit-msg stage, catching non-conforming messages before they reach CI.
 
 When adding new CI checks:
-- Project-specific jobs (coverage, deploy) go in `ci.yml`
-- Cross-cutting policies (commit style, size limits) get their own workflow file
-- All workflows use least-privilege `permissions`. Most use `contents: read`; workflows that need write access (like branch-cleanup) declare only the permissions they need. All workflows have a `concurrency` group.
-
 ## Agent Behavior
 
 When an AI agent is working in this repository:

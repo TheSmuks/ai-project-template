@@ -15,9 +15,9 @@ This file is auto-discovered by AI coding agents (OMP, Codex, Cursor, Aider, Jul
 
 ## Build & Run
 
+
 - **Install pre-commit hooks:** `pip install pre-commit && pre-commit install`
 
-<!-- Fill in the commands for your project. Remove what doesn't apply. -->
 <!-- Fill in the commands for your project. Remove what doesn't apply. -->
 
 ```bash

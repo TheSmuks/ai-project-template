@@ -311,6 +311,17 @@ These files document the setup process for agents, but once setup is complete:
 - `ADOPTING.md` is not relevant for greenfield projects
 - `UPGRADING.md` has no prior version to upgrade from
 
+### Placeholder Enforcement
+
+The CI audit job (`ci.yml`) checks all `.md` files for HTML comment placeholders.
+After filling in AGENTS.md and other documentation:
+
+1. **Remove all `<!-- ... -->` placeholders** from project files — do not leave them
+2. The CI placeholder check skips `.omp/` (internal tooling) and `.github/PULL_REQUEST_TEMPLATE.md` (template)
+3. All other markdown files, including AGENTS.md, must have placeholders removed
+
+This ensures projects adopting the template don't inherit placeholder confusion.
+
 ### Cleanup Confirmation
 
 Verify cleanup by running the audit:
@@ -320,6 +331,7 @@ bash .omp/skills/template-guide/scripts/audit.sh
 ```
 
 The audit will warn if scaffolding files are still present after setup.
+
 
 ## Step 7: Initial Commit
 

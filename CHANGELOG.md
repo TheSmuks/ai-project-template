@@ -24,14 +24,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - `.pre-commit-config.yaml` -- Pre-commit hooks for conventional commit enforcement
 - `.github/workflows/branch-lint.yml` -- Branch naming convention enforcement on PRs
-
+sk|- `.omp/skills/setup/SKILL.md` -- Added one-liner trigger, Step 0 context detection, Step 6 post-setup orientation, warnings
 ### Changed
 - `changelog-check.yml` -- Replaced `dangoslen/changelog-enforcer` with `zattoo/changelog@v1` for format validation
 - `ci.yml` -- Added placeholder detection step to audit job
 - `AGENTS.md` -- Added branch-lint to CI/CD table, pre-commit installation to Build & Run
 - `CONTRIBUTING.md` -- Added pre-commit install to Quick Start section
-- `SETUP_GUIDE.md` -- Added branch-lint to workflow table, pre-commit installation step, renumbered sections
-- `docs/ci.md` -- Added branch-lint workflow, updated trigger model section
+dt|- `SETUP_GUIDE.md` -- Full rewrite with dual-audience structure (For Humans / For LLM Agents), numbered Steps 0-6, post-setup orientation, warnings
+mk|- `README.md` -- Added one-liner bootstrap prompt to Getting Started section
+ij|- `ADOPTING.md` -- Added dual-audience headers (For Humans / For LLM Agents)
+nl|- `docs/ci.md` -- Added branch-lint workflow, updated trigger model section
 
 ### Fixed
 - `audit.sh` -- Extended to check all .md files for placeholders, warn on leftover scaffolding files, added branch-lint.yml and .pre-commit-config.yaml to checks

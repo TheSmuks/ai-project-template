@@ -8,10 +8,10 @@ This project uses separate GitHub Actions workflow files, one concern per file. 
 |---|---|
 | `ci.yml` | Lint, typecheck, and test |
 | `commit-lint.yml` | Enforce conventional commit messages |
-| `changelog-check.yml` | Require changelog entries on pull requests |
+| `changelog-check.yml` | Validate changelog format and entries on pull requests |
 | `blob-size-policy.yml` | Reject large files in pull requests |
 | `branch-cleanup.yml` | Delete merged feature branches |
-
+| `branch-lint.yml` | Enforce branch naming conventions on pull requests |
 ## 2. Workflow Structure
 
 Separating workflows into individual files provides three advantages:
@@ -55,14 +55,21 @@ on:
 ```
 
 ```yaml
+# branch-lint.yml — PRs only, validates branch names
+on:
+  pull_request:
+    branches: [main]
+```
+
+
+```yaml
 # branch-cleanup.yml — PR closed
 on:
   pull_request:
     types: [closed]
 ```
 
-Most workflows trigger on `push` and `pull_request` to `main`. The `changelog-check` and `blob-size-policy` workflows run only on pull requests, since their policies only apply to code under review. The `branch-cleanup` workflow triggers when a pull request is closed (merged or not), and the job only runs if the PR was actually merged.
-
+Most workflows trigger on `push` and `pull_request` to `main`. The `changelog-check`, `blob-size-policy`, and `branch-lint` workflows run only on pull requests, since their policies only apply to code under review. The `branch-cleanup` workflow triggers when a pull request is closed (merged or not), and the job only runs if the PR was actually merged.
 ### Permissions
 
 All workflows declare a `concurrency` group:

@@ -1,0 +1,22 @@
+name: Branch Lint
+
+on:
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: branch-lint-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  branch-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: deepakputhraya/action-branch-name@master
+        with:
+          regex: '([a-z]+)\/([a-z0-9-]+)'
+          allowed_prefixes: 'feature,feat,bugfix,fix,hotfix,chore,docs,refactor,perf,test,ci,release'
+          ignore: 'main,master,develop,dependabot/**'

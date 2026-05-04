@@ -89,14 +89,14 @@ Also add language-specific config:
 
 ### 5. Configure CI workflows
 
-The template provides four workflow files in `.github/workflows/`:
+The template provides five workflow files in `.github/workflows/`:
 
 | File | Purpose | Needs customization? |
-|------|---------|---------------------|
 | `ci.yml` | Lint, typecheck, test | **Yes** — replace placeholders with your commands |
 | `commit-lint.yml` | Enforces conventional commits | No — works out of the box |
-| `changelog-check.yml` | Requires CHANGELOG.md updates on PRs | No — works out of the box |
+| `changelog-check.yml` | Validates changelog format on PRs | No — works out of the box |
 | `blob-size-policy.yml` | Rejects files over 1MB | Maybe — adjust `BLOB_SIZE_LIMIT` if needed |
+| `branch-lint.yml` | Enforces branch naming conventions | No — works out of the box |
 
 For `ci.yml`:
 1. Uncomment the language block matching your project (Node, Python, Go, or Rust)
@@ -106,7 +106,18 @@ For `ci.yml`:
 
 For the full CI architecture guide, see [docs/ci.md](./docs/ci.md).
 
-### 6. Update .architecture.yml
+
+
+
+### 5.5. Install pre-commit hooks
+Install the pre-commit framework to enforce conventional commits locally:
+
+```bash
+pip install pre-commit && pre-commit install
+```
+
+This runs on every `git commit` and will reject non-conforming commit messages before they reach CI.
+### 7. Update .architecture.yml
 
 Replace placeholder values with project-specific thresholds:
 - Set `max_file_lines` to your convention
@@ -114,20 +125,20 @@ Replace placeholder values with project-specific thresholds:
 - Set `max_exports` to your convention
 - Adjust `ignore_patterns` for your project structure
 
-### 7. Update .devcontainer/devcontainer.json
+### 8. Update .devcontainer/devcontainer.json
 
 - Set the correct base image for your language/runtime
 - Add language-specific extensions
 - Update features (e.g., Python, Go, Rust instead of Node)
 - Remove if the project won't use devcontainers
 
-### 8. Update CODEOWNERS
+### 9. Update CODEOWNERS
 
 - Replace `@org/project-team` with the actual owner/team
 - Add code owners for specific directories
 - Remove sections that don't apply to your project
 
-### 9. Update .gitignore
+### 10. Update .gitignore
 
 Add language-specific ignore patterns:
 - Node: `node_modules/`, `dist/`, `.next/`
@@ -135,7 +146,7 @@ Add language-specific ignore patterns:
 - Go: Binary output
 - Rust: `target/`
 
-### 10. Review .omp/agents/
+### 11. Review .omp/agents/
 
 The template includes three example agents:
 
@@ -155,9 +166,9 @@ Agent files use the OMP agent format. Each has:
 - `description`: What it does (shown in agent listings)
 - `instructions`: The prompt the agent follows
 
-### 11. Create docs/decisions/0001-initial-architecture.md
+### 12. Create docs/decisions/0001-initial-architecture.md
 
-### 12. (Optional) Review the template-guide skill
+### 13. (Optional) Review the template-guide skill
 
 The `.omp/skills/template-guide/` skill helps AI agents navigate template conventions, audit compliance, and guide future upgrades. Keep it if you want AI agents to have structured access to template knowledge.
 

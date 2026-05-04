@@ -24,8 +24,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `cut-release` skill scripts for automated release workflow.
 
-
 ## [Unreleased]
+
+### Added
+
+- `.pre-commit-config.yaml` — Pre-commit hooks for conventional commit enforcement
+- `.github/workflows/branch-lint.yml` — Branch naming convention enforcement on PRs
+
+### Changed
+
+- `changelog-check.yml` — Replaced `dangoslen/changelog-enforcer` with `zattoo/changelog@v1` for format validation
+- `ci.yml` — Added placeholder detection step to audit job
+- `AGENTS.md` — Added branch-lint to CI/CD table, pre-commit installation to Build & Run
+- `CONTRIBUTING.md` — Added pre-commit install to Quick Start section
+- `SETUP_GUIDE.md` — Added branch-lint to workflow table, pre-commit installation step, renumbered sections
+- `docs/ci.md` — Added branch-lint workflow, updated trigger model section
+
+### Fixed
+
+- `audit.sh` — Extended to check all .md files for placeholders, warn on leftover scaffolding files, added branch-lint.yml and .pre-commit-config.yaml to checks
+- `setup/SKILL.md` — Added final cleanup step to remove scaffolding files (SETUP_GUIDE.md, ADOPTING.md, UPGRADING.md)
 
 
 ## [0.5.0] — 2026-05-02

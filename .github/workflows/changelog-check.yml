@@ -16,10 +16,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - name: Check CHANGELOG.md is updated
-        uses: dangoslen/changelog-enforcer@v4
+      - uses: zattoo/changelog@v1
         with:
-          changeLogPath: CHANGELOG.md
-          missingUpdateErrorMessage: |
-            Please update CHANGELOG.md with your changes under the [Unreleased] section.
-            See CONTRIBUTING.md for guidelines.
+          token: ${{ github.token }}

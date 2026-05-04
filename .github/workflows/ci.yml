@@ -38,3 +38,15 @@ jobs:
         run: |
           set -e
           bash .omp/skills/template-guide/scripts/audit.sh
+
+      - name: Check for placeholder comments
+        run: |
+          PLACEMENTS=$(grep -rn '<!--\s*\(e\.g\.\|TODO\|FIXME\|replace me\|fill in\)' --include='*.md' . || true)
+          if [ -n "$PLACEMENTS" ]; then
+            echo "::error::HTML comment placeholders found in markdown files:"
+            echo "$PLACEMENTS"
+            echo ""
+            echo "Replace placeholders with actual content or remove them."
+            exit 1
+          fi
+          echo "PASS: no placeholder comments found"

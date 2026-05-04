@@ -4,11 +4,12 @@ Thank you for your interest in contributing. This document covers the convention
 
 ## Quick Start
 
-1. Fork the repository
-2. Create a feature branch (see [Branch Naming](#branch-naming))
-3. Make your changes
-4. Update [CHANGELOG.md](./CHANGELOG.md) under `[Unreleased]`
-5. Open a Pull Request
+1. Install pre-commit hooks: `pip install pre-commit && pre-commit install`
+2. Fork the repository
+3. Create a feature branch (see [Branch Naming](#branch-naming))
+4. Make your changes
+5. Update [CHANGELOG.md](./CHANGELOG.md) under `[Unreleased]`
+6. Open a Pull Request
 
 ## Branch Naming
 

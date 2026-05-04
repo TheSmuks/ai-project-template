@@ -297,14 +297,47 @@ If any checks fail:
 
 ---
 
-## Step 6: Cleanup
+## Step 6: Final Cleanup
 
-After successful setup:
+After successful setup, **remove scaffolding files** that are no longer relevant:
 
-1. **Remove SETUP_GUIDE.md** (if greenfield) — replaced by this skill
-2. **Remove unselected features** — don't leave commented-out code
-3. **Update .template-version** — record the template version used
-4. **Create initial commit** — commit all generated files
+```bash
+# Remove setup scaffolding (no longer needed after interactive setup)
+rm -f SETUP_GUIDE.md ADOPTING.md UPGRADING.md
+```
+
+These files document the setup process for agents, but once setup is complete:
+- `SETUP_GUIDE.md` is replaced by this interactive skill
+- `ADOPTING.md` is not relevant for greenfield projects
+- `UPGRADING.md` has no prior version to upgrade from
+
+### Cleanup Confirmation
+
+Verify cleanup by running the audit:
+
+```bash
+bash .omp/skills/template-guide/scripts/audit.sh
+```
+
+The audit will warn if scaffolding files are still present after setup.
+
+## Step 7: Initial Commit
+
+After cleanup, create the initial commit:
+
+```
+git add -A
+git commit -m "feat: initial project setup
+
+Setup from ai-project-template v\${TEMPLATE_VERSION}
+Includes:
+- Core documentation (AGENTS.md, ARCHITECTURE.md, CONTRIBUTING.md, README.md, CHANGELOG.md)
+- CI workflows (ci.yml, commit-lint.yml, changelog-check.yml, blob-size-policy.yml, branch-lint.yml)
+- Agent configuration (.omp/agents/, .omp/skills/)
+- Pre-commit hooks (.pre-commit-config.yaml)
+- OMP extensions (.omp/rules/, .omp/hooks/, .omp/tools/)
+"
+```
 
 ### Final Status Report
 
@@ -319,10 +352,11 @@ Template Version: <version>
 
 Installed Features:
   • Core Docs (AGENTS.md, ARCHITECTURE.md, etc.)
-  • CI Workflows (3 quality gates)
+  • CI Workflows (5 quality gates including branch-lint)
   • Agent Config (3 agents)
   • OMP Extensions (rules, hooks, tools)
-  • OMP Skills (4 skills)
+  • OMP Skills (4 skills including setup)
+  • Pre-commit hooks (conventional commits)
   • Code Quality
   • ADR Process
   • Git Ignore
@@ -330,9 +364,9 @@ Installed Features:
 Next Steps:
   1. Review and customize AGENTS.md for your project
   2. Fill in architecture details in ARCHITECTURE.md
-  3. Run your first build command to verify setup
+  3. Install pre-commit hooks: `pip install pre-commit && pre-commit install`
+  4. Run your first build command to verify setup
 ```
-
 ---
 
 ## Edge Cases

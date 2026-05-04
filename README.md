@@ -29,6 +29,10 @@ AI coding agents (OMP, Codex, Cursor, Aider, and others) excel at implementation
 
 ## Getting Started
 
+> **Using an AI coding agent?** Paste this into your session:
+> ```
+> Set up this project from the ai-project-template. Read SETUP_GUIDE.md and follow the interactive setup.
+> ```
  New Project | Existing Project |
 ---|---:|
  Start fresh with a fully configured project. Follow [SETUP_GUIDE.md](./SETUP_GUIDE.md) to customize metadata, install dependencies, and configure your first CI run. | Integrate incrementally into an existing repository. Follow [ADOPTING.md](./ADOPTING.md) to merge conventions and CI workflows without breaking your current workflow. |

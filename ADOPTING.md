@@ -1,11 +1,19 @@
 # Adopting ai-project-template Into an Existing Repository
-
-This guide is for teams who already have a codebase and want to bring in the conventions, structure, and agent configuration from `ai-project-template` — without disrupting existing workflows.
+## For Humans
 
 > **If you're already using the template and want to update to a newer version**, see [UPGRADING.md](./UPGRADING.md) instead.
 > **If you just cloned this template to start a new project, you're in the wrong place.** See [SETUP_GUIDE.md](./SETUP_GUIDE.md) instead.
 
+This guide is for teams who already have a codebase and want to bring in the conventions, structure, and agent configuration from `ai-project-template` — without disrupting existing workflows.
+
+
 ---
+
+## For LLM Agents
+
+> **IMPORTANT:** Read [SETUP_GUIDE.md](./SETUP_GUIDE.md) first for the full interactive setup flow. This guide covers the existing-repo adoption path only.
+
+Follow the Incremental Adoption Path in phases. See the section below for structured guidance.
 
 ## Pre-flight Audit
 

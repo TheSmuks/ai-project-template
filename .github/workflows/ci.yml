@@ -49,7 +49,7 @@ jobs:
           PLACEMENTS=$(grep -rn '<!--\s*\(e\.g\.\|TODO\|FIXME\|replace me\|fill in\)' \
             --include='*.md' \
             --exclude-dir=.omp \
-            --exclude='./.github/PULL_REQUEST_TEMPLATE.md' \
+            --exclude='PULL_REQUEST_TEMPLATE.md' \
             --exclude='AGENTS.md' \
             . || true)
           if [ -n "$PLACEMENTS" ]; then

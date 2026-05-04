@@ -2,8 +2,9 @@
 name: setup
 description: Interactive project setup from the ai-project-template — replaces the static SETUP_GUIDE.md with a guided, multi-step workflow
 category: setup
+template-version: 0.6.0
 tags: [setup, initialization, template, onboarding]
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Interactive Setup Skill
@@ -17,13 +18,30 @@ Invoke this skill when:
 - Adopting template conventions into an existing project
 - Running `/setup` in an OMP session for a new repo
 - User says "set up this project" or "initialize from template"
+- User pastes the bootstrap prompt: "Set up this project from the ai-project-template. Read SETUP_GUIDE.md and follow the interactive setup."
+
+## One-Liner Trigger
+
+When a user pastes this prompt, invoke this skill immediately:
+
+```
+Set up this project from the ai-project-template. Read SETUP_GUIDE.md and follow the interactive setup.
+```
+
+The skill will:
+1. Read `SETUP_GUIDE.md` for structured guidance
+2. Detect the context (greenfield vs existing repo)
+3. Ask targeted questions about language, build tools, and features
+4. Generate and customize files
+5. Verify the setup
+6. Present a post-setup orientation explaining what was installed
 
 ## Prerequisites
 
 Before running this skill:
 1. Ensure you're in a git repository (initialized or about to be)
 2. Verify you have write permissions to create files
-3. Check `SETUP_GUIDE.md` and `ADOPTING.md` for reference details
+3. Read `SETUP_GUIDE.md` — it contains the authoritative step definitions
 
 ## Feature Groups
 
@@ -32,7 +50,7 @@ The setup workflow operates on **opt-in feature groups**. Each group can be acce
 |Group|Default|Includes|
 |-----|-------|--------|
 |[Core Docs](#core-docs)|On (required)|AGENTS.md, ARCHITECTURE.md, CONTRIBUTING.md, README.md, CHANGELOG.md|
-|[CI Workflows](#ci-workflows)|On|commit-lint, changelog-check, blob-size-policy, ci.yml|
+|[CI Workflows](#ci-workflows)|On|commit-lint, changelog-check, blob-size-policy, ci.yml, branch-lint|
 |[Agent Config](#agent-config)|On|.omp/agents/ (code-reviewer, adr-writer, changelog-updater)|
 |[OMP Extensions](#omp-extensions)|On|.omp/rules/, .omp/hooks/, .omp/tools/|
 |[OMP Skills](#omp-skills)|On|.omp/skills/ (cut-release, merge-to-main, template-guide)|
@@ -44,9 +62,9 @@ The setup workflow operates on **opt-in feature groups**. Each group can be acce
 
 ---
 
-## Step 1: Detect Context
+## Step 0: Detect Context
 
-First, determine whether this is a **greenfield** setup (from template) or **existing repo** adoption.
+**Goal:** Determine whether this is a greenfield setup (from template) or an existing repository adoption.
 
 ### Greenfield Detection
 
@@ -67,15 +85,17 @@ Check for these signals:
 ```
 IF existing repo with ADOPTING.md:
   → Use ADOPTING.md logic (simplified flow)
-  → Skip Step 2 (project info already exists)
+  → Skip Step 2 (project info already exists in the codebase)
 ELSE IF greenfield from template:
   → Full interactive flow
-  → Collect project info in Step 2
+  → Collect project info in Step 1
+ELSE:
+  → Prompt user: "Is this a new project from the template, or an existing project to adopt?"
 ```
 
 ---
 
-## Step 2: Collect Project Info
+## Step 1: Collect Project Info
 
 If greenfield, gather the essential information. Ask the user or infer from existing files.
 
@@ -96,6 +116,7 @@ If greenfield, gather the essential information. Ask the user or infer from exis
      - Build command
      - Test command
      - Lint command
+     - Type check command (if applicable)
 
 ### Example Detection Script
 
@@ -114,7 +135,7 @@ fi
 
 ---
 
-## Step 3: Feature Selection
+## Step 2: Feature Selection
 
 Present each feature group to the user with clear descriptions. Use `ask` with `multi: true` where appropriate.
 
@@ -132,18 +153,19 @@ Present each feature group to the user with clear descriptions. Use `ask` with `
 
 ### CI Workflows
 
-Prompt: "Include CI quality gates?"
+> **Warning:** Skipping CI means no automated quality gates. Commits won't be checked for conventional format, CHANGELOG entries won't be enforced, and file sizes won't be limited.
 
 ```
-✓ .github/workflows/ci.yml          — Lint, test, typecheck
-✓ .github/workflows/commit-lint.yml — Commit message enforcement
-✓ .github/workflows/changelog-check.yml — CHANGELOG update enforcement
+✓ .github/workflows/ci.yml              — Lint, test, typecheck
+✓ .github/workflows/commit-lint.yml     — Commit message enforcement
+✓ .github/workflows/changelog-check.yml  — CHANGELOG update enforcement
 ✓ .github/workflows/blob-size-policy.yml — File size limits
+✓ .github/workflows/branch-lint.yml     — Branch naming conventions
 ```
 
 ### Agent Config
 
-Prompt: "Include which agent configurations?" (multi-select)
+Multi-select. Which agents do you want?
 
 ```
 ✓ Code Reviewer     — Reviews PRs for correctness, security, style
@@ -152,8 +174,6 @@ Prompt: "Include which agent configurations?" (multi-select)
 ```
 
 ### OMP Extensions
-
-Prompt: "Include which OMP extensions?" (multi-select)
 
 ```
 ✓ Rules     — Convention enforcement (TTSR and scope-based)
@@ -165,7 +185,7 @@ See [docs/omp-extensions-guide.md](docs/omp-extensions-guide.md) for details.
 
 ### OMP Skills
 
-Prompt: "Include which skills?" (multi-select)
+Multi-select. Which skills do you want?
 
 ```
 ✓ Cut Release     — Semantic version bumps and release PRs
@@ -176,8 +196,6 @@ Prompt: "Include which skills?" (multi-select)
 
 ### Dev Container
 
-Prompt: "Include devcontainer configuration?"
-
 ```
 ✓ .devcontainer/devcontainer.json — VS Code Dev Container setup
 ✓ .devcontainer/Dockerfile        — Container build definition
@@ -186,8 +204,6 @@ Prompt: "Include devcontainer configuration?"
 Recommended for team environments or consistent developer experience.
 
 ### Code Quality
-
-Prompt: "Include code quality configuration?"
 
 ```
 ✓ .editorconfig         — Consistent editor settings
@@ -198,16 +214,12 @@ Adapted to detected language.
 
 ### ADR Process
 
-Prompt: "Include ADR (Architecture Decision Record) process?"
-
 ```
 ✓ docs/decisions/               — Decision log directory
 ✓ docs/decisions/0000-template.md — Template for new ADRs
 ```
 
 ### Git Ignore
-
-Prompt: "Include .gitignore?"
 
 ```
 ✓ .gitignore — Language-specific patterns for:
@@ -219,8 +231,6 @@ Prompt: "Include .gitignore?"
 
 ### CODEOWNERS
 
-Prompt: "Include CODEOWNERS file?"
-
 ```
 ✓ CODEOWNERS — GitHub team ownership for code review routing
 ```
@@ -229,7 +239,7 @@ Off by default (requires team configuration).
 
 ---
 
-## Step 4: Generate Files
+## Step 3: Generate & Customize Files
 
 For each selected feature group:
 
@@ -270,7 +280,7 @@ For each selected feature group:
 
 ---
 
-## Step 5: Verify
+## Step 4: Verify
 
 After generation, run the audit to confirm compliance:
 
@@ -295,9 +305,11 @@ If any checks fail:
 2. **Fix manually** or re-run setup for that group
 3. **Document issues** in a `SETUP_ISSUES.md` for future resolution
 
+> **Do not proceed to Step 5 with known failures.** The cleanup step removes `SETUP_GUIDE.md`, which means the audit checklist goes with it. Fix issues now.
+
 ---
 
-## Step 6: Final Cleanup
+## Step 5: Final Cleanup
 
 After successful setup, **remove scaffolding files** that are no longer relevant:
 
@@ -336,6 +348,108 @@ bash .omp/skills/template-guide/scripts/audit.sh
 
 The audit will warn if scaffolding files are still present after setup.
 
+---
+
+## Step 6: Post-Setup Orientation
+
+**Goal:** Explain what was installed and why each piece matters. Present this to the user after setup completes.
+
+### What Was Installed
+
+#### Core Documentation
+
+| File | Purpose | What to do with it |
+|------|---------|-------------------|
+| `AGENTS.md` | Project context for AI coding agents | Fill in project name, description, build commands, code style. AI agents read this on every session. |
+| `ARCHITECTURE.md` | System design documentation | Document your architecture. Start with high-level overview, expand as you go. |
+| `CONTRIBUTING.md` | Contribution guidelines | Document your commit style, branch naming, PR process. |
+| `README.md` | Project documentation | Replace template content with actual project docs. |
+| `CHANGELOG.md` | Version history | Every user-facing change goes here. See [Keep a Changelog](https://keepachangelog.com/). |
+
+#### CI Workflows
+
+| File | Purpose | Notes |
+|------|---------|-------|
+| `.github/workflows/ci.yml` | Lint, typecheck, test | Main CI pipeline. Customize with your actual commands. |
+| `.github/workflows/commit-lint.yml` | Enforce conventional commits | Runs on every PR commit. No configuration needed. |
+| `.github/workflows/changelog-check.yml` | Require changelog entries on PRs | Ensures every PR updates CHANGELOG.md. |
+| `.github/workflows/branch-lint.yml` | Enforce branch naming conventions | Follows `<type>/<short-description>` pattern. |
+| `.github/workflows/blob-size-policy.yml` | Reject files over 1MB | Adjust `BLOB_SIZE_LIMIT` if needed. |
+
+#### Agent Configuration
+
+| File | Purpose | When to use |
+|------|---------|-------------|
+| `.omp/agents/code-reviewer.md` | Reviews PRs for correctness, security, style | Invoke on any PR before merge. |
+| `.omp/agents/adr-writer.md` | Generates Architecture Decision Records | Use when making significant architectural decisions. |
+| `.omp/agents/changelog-updater.md` | Updates CHANGELOG.md | Use before releases or when merging significant features. |
+
+#### OMP Skills
+
+| Skill | Purpose | How to invoke |
+|-------|---------|---------------|
+| `cut-release` | Semantic version bumps, changelog, GitHub release | Run before each release. |
+| `merge-to-main` | Monitor CI, fix failures, merge when green | Run after opening a PR. |
+| `template-guide` | Navigate template conventions, audit compliance | Run when upgrading template versions. |
+| `setup` | Interactive project setup | Re-run if you need to add features later. |
+
+#### Code Quality
+
+| File | Purpose | What to customize |
+|------|---------|-------------------|
+| `.editorconfig` | Consistent editor settings | Adjust for your team's preferences. |
+| `.architecture.yml` | Code quality thresholds | Set concrete numbers based on your conventions. |
+
+### Why These Matter
+
+- **`AGENTS.md`** — Without it, AI agents make generic contributions that don't match your project's conventions. With it, they understand your build commands, code style, and project structure from day one.
+
+- **CI workflows** — These are the quality gates that run on every PR. They catch conventional commit violations, missing changelog entries, oversized files, and branch naming issues before they reach `main`.
+
+- **Agent configs** — AI agents have context windows that forget details. Agent definitions provide persistent, scoped instructions that apply whenever that agent is invoked.
+
+- **OMP skills** — Skills provide structured workflows for complex, multi-step tasks. They encode best practices (audit before commit, consolidate changelogs before merge) so you don't have to remember the steps.
+
+### Next Steps
+
+1. **Review and customize `AGENTS.md`** — This is the most important file for AI-assisted development
+2. **Fill in `ARCHITECTURE.md`** — Start with high-level overview, expand as the project evolves
+3. **Configure your CI secrets** — Add any required secrets to GitHub
+4. **Run your first build** — `npm run build` (or equivalent) to verify the project builds
+5. **Make your first commit** — Follow conventional commit format: `feat:`, `fix:`, `docs:`, etc.
+
+---
+
+## Warnings
+
+### Skipping CI
+
+> **Warning:** Skipping CI means no automated quality gates. Commits won't be checked for conventional format, CHANGELOG entries won't be enforced, and file sizes won't be limited.
+
+The template's CI workflows are designed to be additive — they run independently of existing CI. Even if you have your own CI, adding these workflows costs nothing and catches issues your CI might miss.
+
+### Leaving Placeholders
+
+> **Warning:** Leaving `<!-- ... -->` placeholders in project files causes audit failures. The CI `blob-size-policy.yml` workflow checks all `.md` files for HTML comment placeholders and will fail your PR if any are found.
+
+The only files exempt from this check are:
+- `.omp/` — internal tooling (self-referential)
+- `.github/PULL_REQUEST_TEMPLATE.md` — template with intentional examples
+- `AGENTS.md` in the **template root** — has example placeholders for reference
+
+### Not Running Pre-commit Hooks
+
+> **Warning:** Without pre-commit hooks, non-conforming commit messages reach CI and get rejected there. This means wasted CI minutes and delayed PRs.
+
+Install them: `pip install pre-commit && pre-commit install`
+
+### Skipping Documentation
+
+> **Warning:** Skipping `AGENTS.md` or `ARCHITECTURE.md` means AI agents have no project context. They will make generic contributions that don't match your conventions, naming, or structure.
+
+At minimum, keep these core docs even if you skip everything else.
+
+---
 
 ## Step 7: Initial Commit
 
@@ -345,13 +459,20 @@ After cleanup, create the initial commit:
 git add -A
 git commit -m "feat: initial project setup
 
-Setup from ai-project-template v\${TEMPLATE_VERSION}
+Setup from ai-project-template v${TEMPLATE_VERSION}
 Includes:
 - Core documentation (AGENTS.md, ARCHITECTURE.md, CONTRIBUTING.md, README.md, CHANGELOG.md)
 - CI workflows (ci.yml, commit-lint.yml, changelog-check.yml, blob-size-policy.yml, branch-lint.yml)
 - Agent configuration (.omp/agents/, .omp/skills/)
 - Pre-commit hooks (.pre-commit-config.yaml)
 - OMP extensions (.omp/rules/, .omp/hooks/, .omp/tools/)
+- Code Quality (.editorconfig, .architecture.yml)
+- ADR Process (docs/decisions/)
+- Git Ignore (language-specific patterns)
+
+Skipped:
+- Dev Container (not selected)
+- CODEOWNERS (not selected)
 "
 ```
 
@@ -383,6 +504,7 @@ Next Steps:
   3. Install pre-commit hooks: `pip install pre-commit && pre-commit install`
   4. Run your first build command to verify setup
 ```
+
 ---
 
 ## Edge Cases

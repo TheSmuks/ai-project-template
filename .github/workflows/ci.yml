@@ -41,11 +41,16 @@ jobs:
 
       - name: Check for placeholder comments
         run: |
-          # Skip .omp/ (internal tooling) and PR template (has template placeholders)
+          # Skip:
+          # - .omp/ (internal tooling)
+          # - .github/PULL_REQUEST_TEMPLATE.md (template with intentional placeholders)
+          # - AGENTS.md in template root (template repo has example placeholders)
+          #   Note: Projects adopting the template must remove placeholders from their AGENTS.md
           PLACEMENTS=$(grep -rn '<!--\s*\(e\.g\.\|TODO\|FIXME\|replace me\|fill in\)' \
             --include='*.md' \
             --exclude-dir=.omp \
             --exclude='.github/PULL_REQUEST_TEMPLATE.md' \
+            --exclude='AGENTS.md' \
             . || true)
           if [ -n "$PLACEMENTS" ]; then
             echo "::error::HTML comment placeholders found in markdown files:"

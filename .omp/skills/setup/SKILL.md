@@ -314,11 +314,15 @@ These files document the setup process for agents, but once setup is complete:
 ### Placeholder Enforcement
 
 The CI audit job (`ci.yml`) checks all `.md` files for HTML comment placeholders.
-After filling in AGENTS.md and other documentation:
 
-1. **Remove all `<!-- ... -->` placeholders** from project files — do not leave them
-2. The CI placeholder check skips `.omp/` (internal tooling) and `.github/PULL_REQUEST_TEMPLATE.md` (template)
-3. All other markdown files, including AGENTS.md, must have placeholders removed
+**Important:** The CI check excludes:
+- `.omp/` — internal tooling (self-referential)
+- `.github/PULL_REQUEST_TEMPLATE.md` — template with intentional examples
+- `AGENTS.md` in the **template root** — has example placeholders
+
+After adopting into a **new project**, you must:
+1. **Remove all `<!-- ... -->` placeholders** from your project's AGENTS.md and other files
+2. The CI check will then fail if you accidentally leave any placeholders
 
 This ensures projects adopting the template don't inherit placeholder confusion.
 

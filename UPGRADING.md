@@ -36,7 +36,7 @@ Look for:
 
 | Category | Files | Strategy |
 |---|---|---|
-| **Safe to copy** | `.github/workflows/*.yml` (except `ci.yml`), `.editorconfig`, `docs/ci.md`, `docs/agent-files-guide.md`, `docs/architecture.md`, `docs/decisions/*`, `.devcontainer/devcontainer.json`, `dependabot.yml`, `.gitattributes`, `CODEOWNERS` | Overwrite if you haven't modified them locally |
+| **Safe to copy** | `.github/workflows/*.yml` (except `ci.yml`), `.editorconfig`, `docs/ci.md`, `docs/agent-files-guide.md`, `docs/decisions/*`, `.devcontainer/devcontainer.json`, `dependabot.yml`, `.gitattributes`, `CODEOWNERS` | Overwrite if you haven't modified them locally |
 | **Merge carefully** | `AGENTS.md`, `CONTRIBUTING.md`, `.architecture.yml`, `CHANGELOG.md` | Diff and cherry-pick structural changes; preserve project-specific content |
 | **Never overwrite** | `README.md`, `ARCHITECTURE.md`, any project-specific files | Read changelog for new sections to add manually |
 | **New files** | Any file not present in your version | Copy if relevant to your project |
@@ -114,7 +114,7 @@ These files provide infrastructure (CI/CD, tooling, documentation) that doesn't 
 - **`.editorconfig`** — Editor settings, language-agnostic
 - **`docs/ci.md`** — CI documentation, not project-specific
 - **`docs/agent-files-guide.md`** — Template authoring guide
-- **`docs/architecture.md`** — Architecture template
+<!-- docs/architecture.md removed: ARCHITECTURE.md is now at root -->
 - **`docs/decisions/`** — ADR templates
 - **`.devcontainer/devcontainer.json`** — Dev container config (replace base image if needed)
 - **`dependabot.yml`** — Dependency update automation

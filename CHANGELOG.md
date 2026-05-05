@@ -25,15 +25,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `.pre-commit-config.yaml` -- Pre-commit hooks for conventional commit enforcement
 - `.github/workflows/branch-lint.yml` -- Branch naming convention enforcement on PRs
 sk|- `.omp/skills/setup/SKILL.md` -- Added one-liner trigger, Step 0 context detection, Step 6 post-setup orientation, warnings
+
+nm|- `.omp/rules/setup-adapt.md` -- TTSR rule enforcing adapt-not-copy and scaffolding cleanup during setup
 ### Changed
 - `changelog-check.yml` -- Replaced `dangoslen/changelog-enforcer` with `zattoo/changelog@v1` for format validation
 - `ci.yml` -- Added placeholder detection step to audit job
-- `AGENTS.md` -- Added branch-lint to CI/CD table, pre-commit installation to Build & Run
+
+is|- `AGENTS.md` -- Added branch-lint to CI/CD table, pre-commit installation to Build & Run, two new Agent Behavior bullets about setup skill loading and scaffolding cleanup
 - `CONTRIBUTING.md` -- Added pre-commit install to Quick Start section
-dt|- `SETUP_GUIDE.md` -- Full rewrite with dual-audience structure (For Humans / For LLM Agents), numbered Steps 0-6, post-setup orientation, warnings
-mk|- `README.md` -- Added one-liner bootstrap prompt to Getting Started section
-ij|- `ADOPTING.md` -- Added dual-audience headers (For Humans / For LLM Agents)
-nl|- `docs/ci.md` -- Added branch-lint workflow, updated trigger model section
+
+
+fa|dt|- `SETUP_GUIDE.md` -- Full rewrite with dual-audience structure (For Humans / For LLM Agents), numbered Steps 0-6, post-setup orientation, warnings; added Per-File Generation Rules table, Scaffolding Anti-Patterns table, mandatory cleanup block
+ok|mk|- `README.md` -- Added one-liner bootstrap prompt to Getting Started section
+kk|ij|- `ADOPTING.md` -- Added dual-audience headers (For Humans / For LLM Agents)
+dy|nl|- `docs/ci.md` -- Added branch-lint workflow, updated trigger model section
+
+di|- `.omp/skills/setup/SKILL.md` -- Strengthened Step 5 with mandatory cleanup, added Scaffolding Anti-Patterns table, changed "Copy from template" to "Generate from template", added Per-File Generation Rules table
+ld|- `.omp/skills/template-guide/scripts/audit.sh` -- Extended scaffolding check to all three files, fails instead of warns when scaffolding persists
 
 ### Fixed
 - `audit.sh` -- Extended to check all .md files for placeholders, warn on leftover scaffolding files, added branch-lint.yml and .pre-commit-config.yaml to checks

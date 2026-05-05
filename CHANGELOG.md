@@ -7,13 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
-## [Unreleased]
+## [0.8.0] — 2026-05-05
 
 ### Added
 - `.omp/skills/llm-wiki/` -- New skill for maintaining a layered LLM Wiki knowledge base: raw sources, wiki pages, and schema layer with ingest/query/lint operations
 
 ### Fixed
 - `ARCHITECTURE.md` -- Moved full architecture template to repo root, deleting duplicate `docs/architecture.md` stub; fixed all references in README.md and UPGRADING.md
+
+## [Unreleased]
 
 
 ## [0.6.0] -- 2026-05-02

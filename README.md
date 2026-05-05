@@ -24,7 +24,7 @@ AI coding agents (OMP, Codex, Cursor, Aider, and others) excel at implementation
 ---|---:|
  **Agent-aware project structure** — Standardized layout with `AGENTS.md`, `SKILL.md` patterns, and agent skills integration. AI coding agents can navigate and contribute effectively from day one. | **Ready-made CI workflows** — Opinionated GitHub Actions pipelines for linting, type-checking, testing, commit linting, changelog enforcement, and file size policy — no configuration required. |
  **Code quality thresholds** — Module size guidelines, function length limits, nesting depth rules, and module export counts built into project documentation. Quality gates enforced by CI. | **Two adoption paths** — Designed for both greenfield projects (via `SETUP_GUIDE.md`) and existing repositories (via `ADOPTING.md`). Incrementally adopt only what you need. |
- **Devcontainer configuration** — Pre-configured `.devcontainer/` with everything in place for VS Code Dev Containers or GitHub Codespaces. | **Documentation templates** — `CHANGELOG.md`, `CONTRIBUTING.md`, `AGENTS.md`, `docs/architecture.md`, and `docs/agent-files-guide.md` included and pre-formatted. |
+ **Devcontainer configuration** — Pre-configured `.devcontainer/` with everything in place for VS Code Dev Containers or GitHub Codespaces. | **Documentation templates** — `CHANGELOG.md`, `CONTRIBUTING.md`, `AGENTS.md`, `ARCHITECTURE.md`, and `docs/agent-files-guide.md` included and pre-formatted. |
  **Conventional commit enforcement** — CI rejects commits that don't follow [Conventional Commits](https://www.conventionalcommits.org/). Branch naming follows [Conventional Branch](https://github.com/nickshanks347/conventional-branch). | **Tiger Style principles** — Built-in engineering guidelines for high-reliability systems: assertions, bounded operations, zero tech debt. |
 
 ## Getting Started
@@ -54,7 +54,7 @@ AI coding agents (OMP, Codex, Cursor, Aider, and others) excel at implementation
 | `.github/workflows/commit-lint.yml` | Enforces Conventional Commits on all PR commits |
 | `.github/workflows/changelog-check.yml` | Ensures CHANGELOG.md is updated in every PR |
 | `.github/workflows/blob-size-policy.yml` | Rejects oversized files (configurable thresholds) |
-| `docs/architecture.md` | Architecture-as-code specification template |
+ARCHITECTURE.md | Architecture-as-code specification template |
 | `docs/agent-files-guide.md` | Practical guide for writing AGENTS.md, ARCHITECTURE.md, and SKILL.md |
 | `docs/ci.md` | CI/CD workflow documentation |
 | `.devcontainer/` | DevContainer configuration for VS Code / Codespaces |
@@ -72,7 +72,7 @@ AI coding agents (OMP, Codex, Cursor, Aider, and others) excel at implementation
 - [ADOPTING.md](./ADOPTING.md) — Incremental adoption for existing repos
 - [UPGRADING.md](./UPGRADING.md) — Re-sync guide for upgrading from older template versions
 - [CONTRIBUTING.md](./CONTRIBUTING.md) — Development guidelines
-- [docs/architecture.md](./docs/architecture.md) — Architecture specification template
+- [ARCHITECTURE.md](./ARCHITECTURE.md) — Architecture specification template
 - [docs/agent-files-guide.md](./docs/agent-files-guide.md) — Guide for agent configuration files
 - [docs/ci.md](./docs/ci.md) — CI/CD workflow documentation
 

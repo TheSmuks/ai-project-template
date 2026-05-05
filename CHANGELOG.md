@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+
+## [Unreleased]
+
+### Added
+- `.omp/skills/llm-wiki/` -- New skill for maintaining a layered LLM Wiki knowledge base: raw sources, wiki pages, and schema layer with ingest/query/lint operations
+
+### Fixed
+- `ARCHITECTURE.md` -- Moved full architecture template to repo root, deleting duplicate `docs/architecture.md` stub; fixed all references in README.md and UPGRADING.md
+
+
 ## [0.6.0] -- 2026-05-02
 - `ci.yml` -- Removed broken `markdown-links` job (subshell pipe bug caused it to always exit 0 regardless of link check results). Link checking is now handled exclusively by the `audit` job.
 - `AGENTS.md` -- Fixed CI/CD table: added missing leading pipe on `branch-cleanup.yml` row and blank line after table.

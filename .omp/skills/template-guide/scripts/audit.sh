@@ -5,7 +5,7 @@
 
 # TEMPLATE_VERSION: This file is part of the ai-project-template version manifest.
 # cut-release.sh updates this line on each release.
-TEMPLATE_VERSION=0.6.0
+TEMPLATE_VERSION=0.7.0
 
 set -euo pipefail
 

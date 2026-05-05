@@ -133,6 +133,9 @@ Agents can invoke the `template-guide` skill (`.omp/skills/template-guide/SKILL.
 7. **Preserve invariants.** If the codebase has patterns (error handling, logging, auth), follow them. Do not introduce a new pattern without removing the old one.
 8. **Clean up after yourself.** Remove unused imports, dead code, and temporary files. A change should leave the codebase cleaner than it was found.
 
+
+9. **Load setup skill for new projects.** When setting up or adopting this template, load the `setup` skill (`.omp/skills/setup/SKILL.md`) and follow its workflow — do not wing it.
+10. **Clean up scaffolding after setup.** After setup completes, remove all scaffolding files (`SETUP_GUIDE.md`, `ADOPTING.md`, `UPGRADING.md`). These are template documentation, not project files.
 ## Conventions
 
 ### Commits

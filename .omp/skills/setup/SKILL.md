@@ -237,18 +237,29 @@ Adapted to detected language.
 
 Off by default (requires team configuration).
 
----
 
 ## Step 3: Generate & Customize Files
 
 For each selected feature group:
 
-1. **Copy from template** with placeholder substitution
+1. **Generate from template** with placeholder substitution (not verbatim copy)
 2. **Customize for detected language** (CI commands, .gitignore patterns)
 3. **Fill in collected project info** (name, language, commands)
 4. **Validate generated files** against template specification
 
+### Per-File Generation Rules
+
+| File | Rule | Why |
+|------|------|-----|
+| `CHANGELOG.md` | **Start fresh** — begin with `[Unreleased]` only. Do not copy template version history. | Template version history is irrelevant noise for adopting projects. |
+| `AGENTS.md` | **Derive from codebase** — infer project name from directory, language from manifest files, build commands from existing scripts. | Copying placeholder content leaves incomplete project context. |
+| `README.md` | **Replace template text** — describe the actual project, not the template. | Template README is for reference, not publication. |
+| `ARCHITECTURE.md` | **Use as scaffold** — keep structure, fill with actual architecture or explicit TODOs. | Architecture is project-specific. |
+| `CONTRIBUTING.md` | **Adapt to project** — use template as style reference, reflect actual conventions. | Conventions vary by project. |
+| `.gitignore` | **Start from language defaults** — generate fresh, don't copy template verbatim. | Template's gitignore may include irrelevant entries. |
+
 ### Placeholder Substitution Map
+
 
 |Placeholder|Replacement|
 |-----------|-----------|
@@ -309,7 +320,13 @@ If any checks fail:
 
 ---
 
-## Step 5: Final Cleanup
+
+## Step 5: Cleanup & Scaffolding Removal (Required)
+
+
+<critical>
+After successful setup, you **MUST** remove scaffolding files that are no longer relevant. This step is **mandatory** — do not skip it.
+</critical>
 
 After successful setup, **remove scaffolding files** that are no longer relevant:
 
@@ -322,6 +339,17 @@ These files document the setup process for agents, but once setup is complete:
 - `SETUP_GUIDE.md` is replaced by this interactive skill
 - `ADOPTING.md` is not relevant for greenfield projects
 - `UPGRADING.md` has no prior version to upgrade from
+
+### Scaffolding Anti-Patterns
+
+| ❌ **Do NOT** | ✅ **Do Instead** |
+|----------|-------------|
+| Copy `CHANGELOG.md` verbatim | Start with empty `[Unreleased]` section |
+| Copy template `AGENTS.md` placeholders | Derive project info from actual codebase |
+| Leave `SETUP_GUIDE.md` after setup | Remove all three scaffolding files as final step |
+| Say "Copy from template" | Say "Generate from template" |
+| Include placeholder HTML comments | Remove all placeholders or fill with actual content |
+| Skip cleanup step | Make cleanup the final mandatory step |
 
 ### Placeholder Enforcement
 

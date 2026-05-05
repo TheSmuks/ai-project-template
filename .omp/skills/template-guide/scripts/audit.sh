@@ -21,13 +21,20 @@ fail() { echo "[FAIL] $*" >&2; ERRORS=$((ERRORS + 1)); }
 
 # ── 1. Scaffolding files leftover ──────────────────────────────────────────
 echo "Checking for leftover scaffolding files..."
-if [ -f "SETUP_GUIDE.md" ] && [ -f "AGENTS.md" ]; then
+SCAFFOLDING_FILES="SETUP_GUIDE.md ADOPTING.md UPGRADING.md"
+if [ -f "AGENTS.md" ]; then
     # Check if AGENTS.md has been customized (no generic placeholders)
     if ! grep -q '<!-- project name -->' AGENTS.md && ! grep -q '<!-- one-line description -->' AGENTS.md; then
-        fail "SETUP_GUIDE.md exists but AGENTS.md has been filled in — setup was completed but scaffolding was not cleaned up"
-        echo "  Remove SETUP_GUIDE.md, ADOPTING.md, and UPGRADING.md after setup completion"
+        for f in $SCAFFOLDING_FILES; do
+            if [ -f "$f" ]; then
+                fail "$f exists but AGENTS.md has been filled in — setup was completed but scaffolding was not cleaned up"
+                echo "  → Run: rm -f $SCAFFOLDING_FILES"
+            fi
+        done
     else
-        pass "SETUP_GUIDE.md exists (setup in progress)"
+        if [ -f "SETUP_GUIDE.md" ]; then
+            pass "SETUP_GUIDE.md exists (setup in progress)"
+        fi
     fi
 else
     pass "No leftover scaffolding files detected"

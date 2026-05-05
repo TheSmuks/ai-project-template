@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - `cut-release` skill scripts for automated release workflow.
 
-## [Unreleased]
+## [0.7.0] — 2026-05-05
 
 ### Added
 - `.pre-commit-config.yaml` -- Pre-commit hooks for conventional commit enforcement
@@ -46,6 +46,8 @@ ld|- `.omp/skills/template-guide/scripts/audit.sh` -- Extended scaffolding check
 ### Fixed
 - `audit.sh` -- Extended to check all .md files for placeholders, warn on leftover scaffolding files, added branch-lint.yml and .pre-commit-config.yaml to checks
 - `setup/SKILL.md` -- Added final cleanup step to remove scaffolding files (SETUP_GUIDE.md, ADOPTING.md, UPGRADING.md)
+
+## [Unreleased]
 
 
 ## [0.5.0] -- 2026-05-02

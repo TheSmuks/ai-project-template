@@ -6,7 +6,7 @@
 
 [![Changelog](https://img.shields.io/badge/changelog-Keep%20a%20Changelog-blue.svg?style=flat-square)](./CHANGELOG.md)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](./LICENSE)
-[![Template](https://img.shields.io/badge/template-v0.6.0-blueviolet.svg?style=flat-square)](./.template-version)
+[![Template](https://img.shields.io/badge/template-v0.7.0-blueviolet.svg?style=flat-square)](./.template-version)
 [![Use this template](https://img.shields.io/badge/use%20this%20template-Deploy-green?logo=github&style=flat-square)](https://github.com/TheSmuks/ai-project-template/generate)
 
 <a href="https://github.com/TheSmuks/ai-project-template/generate"><img src="https://img.shields.io/badge/-Use%20this%20template-2ea44f?style=for-the-badge" alt="Use this template" /></a>

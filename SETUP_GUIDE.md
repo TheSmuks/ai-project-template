@@ -38,7 +38,7 @@ Before running setup:
 1. **Ensure you're in a git repository** — initialized (`git init`) or cloned from the template
 2. **Verify write permissions** — you need to create and modify files
 
-3. **Check the template version** — see [`.template-version`](.template-version) for the current release (currently `0.7.0`)
+3. **Check the template version** — see [`.template-version`](.template-version) for the current release (currently `0.8.0`)
 
 ---
 

@@ -18,7 +18,7 @@ jobs:
     name: Validate YAML files
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Validate YAML workflow files
         run: |
@@ -32,7 +32,7 @@ jobs:
     name: Template compliance audit
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Run compliance audit
         run: |
